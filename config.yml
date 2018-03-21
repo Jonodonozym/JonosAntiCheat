@@ -1,0 +1,7 @@
+notification:
+  opEnabled: true
+  permissionsEnabled: true
+  permissions:
+    - staff.admin
+    
+doLogging: true

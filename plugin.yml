@@ -1,0 +1,5 @@
+main: jdz.antifreecam.AntiFreecamPlugin
+name: AntiFreecam
+version: 1.0
+author: Jonodonozym
+description: Prevents players from opening chests through walls via bugs or hacked clients
