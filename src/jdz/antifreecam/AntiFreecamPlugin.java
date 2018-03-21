@@ -4,10 +4,8 @@ package jdz.antifreecam;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 
 import static org.bukkit.ChatColor.*;
 import org.bukkit.Sound;
