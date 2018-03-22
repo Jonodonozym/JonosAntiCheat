@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 
 import static org.bukkit.ChatColor.*;
 import org.bukkit.Sound;
@@ -27,16 +28,23 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 	private final FileLogger logger = new FileLogger(this);
 
 	private boolean notifyOP = false;
-	private boolean doLogging = true;
+	private boolean fileLogging = true;
+	private boolean consoleLogging = false;
 	private List<String> notifyPermission = new ArrayList<String>();
+	private final HashSet<Material> transparentBlocks = new HashSet<Material>();
 
 	@Override
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(this, this);
+		
+		for (Material m: Material.values())
+			if (m.isTransparent())
+				transparentBlocks.add(m);
 
 		FileConfiguration config = Config.getConfig(this);
 		notifyOP = config.getBoolean("notification.opEnabled");
-		doLogging = config.getBoolean("doLogging");
+		fileLogging = config.getBoolean("notification.fileLogging");
+		consoleLogging = config.getBoolean("notification.consoleLogging");
 		if (config.getBoolean("notification.permissionsEnabled"))
 			notifyPermission = config.getStringList("permissions");
 	}
@@ -51,14 +59,13 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 		Block block = ((BlockState) holder).getBlock();
 		Block target = getTargetBlock(player);
 
-		System.out.println(player.getLocation());
-		System.out.println(target.getLocation());
-		System.out.println(block.getLocation());
-
 		if (!block.getLocation().equals(target.getLocation())) {
 			e.setCancelled(true);
-			if (doLogging)
+			if (fileLogging)
 				log(player, block, target);
+			
+			if (consoleLogging)
+				getLogger().info(player.getName() + " Tried to open a chest through a wall! Check AntiFreecam logs for details");
 
 			for (Player p : Bukkit.getOnlinePlayers())
 				if (shouldNotify(p, player))
@@ -67,7 +74,7 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 	}
 
 	private Block getTargetBlock(Player player) {
-		return player.getTargetBlock((HashSet<Byte>)null, 8);
+		return player.getTargetBlock(transparentBlocks, 8);
 	}
 
 	private boolean shouldNotify(Player player, Player cheater) {
@@ -82,8 +89,6 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 	}
 	
 	private void log(Player player, Block block, Block target) {
-		getLogger().info(
-				player.getName() + " Tried to open a chest through a wall! Check AntiFreecam logs for details");
 		logger.log(player.getName() + " Tried to open a container through a wall!\n" + "\tContainer location: "
 				+ WorldUtils.locationToLegibleString(block.getLocation()) + "\n" + "\tPlayer location: "
 				+ WorldUtils.locationToLegibleString(player.getLocation()) + "\n" + "\tPlayer target block: "

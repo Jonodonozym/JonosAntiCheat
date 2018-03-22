@@ -1,7 +1,8 @@
 notification:
   opEnabled: true
+  fileLogging: true
+  consoleLogging: false
   permissionsEnabled: true
   permissions:
     - staff.admin
     
-doLogging: true
