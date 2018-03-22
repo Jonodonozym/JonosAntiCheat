@@ -36,10 +36,12 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(this, this);
-		
-		for (Material m: Material.values())
+
+		for (Material m : Material.values())
 			if (m.isTransparent())
 				transparentBlocks.add(m);
+		transparentBlocks.add(Material.REDSTONE_WIRE);
+
 
 		FileConfiguration config = Config.getConfig(this);
 		notifyOP = config.getBoolean("notification.opEnabled");
@@ -47,6 +49,21 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 		consoleLogging = config.getBoolean("notification.consoleLogging");
 		if (config.getBoolean("notification.permissionsEnabled"))
 			notifyPermission = config.getStringList("permissions");
+
+
+		for (String s : config.getStringList("ignoreBlocks")) {
+			try {
+				transparentBlocks.add(Material.matchMaterial(s));
+			}
+			catch (Exception e) {
+				try {
+					transparentBlocks.add(Material.getMaterial(Integer.parseInt(s)));
+				}
+				catch (Exception e2) {
+					getLogger().warning("could not parse block to ignore: "+s);
+				}
+			}
+		}
 	}
 
 	@EventHandler
@@ -63,9 +80,10 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 			e.setCancelled(true);
 			if (fileLogging)
 				log(player, block, target);
-			
+
 			if (consoleLogging)
-				getLogger().info(player.getName() + " Tried to open a chest through a wall! Check AntiFreecam logs for details");
+				getLogger().info(
+						player.getName() + " Tried to open a chest through a wall! Check AntiFreecam logs for details");
 
 			for (Player p : Bukkit.getOnlinePlayers())
 				if (shouldNotify(p, player))
@@ -87,7 +105,7 @@ public class AntiFreecamPlugin extends JavaPlugin implements Listener {
 				return true;
 		return false;
 	}
-	
+
 	private void log(Player player, Block block, Block target) {
 		logger.log(player.getName() + " Tried to open a container through a wall!\n" + "\tContainer location: "
 				+ WorldUtils.locationToLegibleString(block.getLocation()) + "\n" + "\tPlayer location: "

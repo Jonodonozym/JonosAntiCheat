@@ -6,3 +6,6 @@ notification:
   permissions:
     - staff.admin
     
+ignoreBlocks:
+  - 1
+  - REDSTONE_DUST
