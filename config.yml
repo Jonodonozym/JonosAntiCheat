@@ -1,4 +1,5 @@
 notification:
+  cooldownSeconds: 1
   opEnabled: true
   fileLogging: true
   consoleLogging: false
@@ -6,6 +7,11 @@ notification:
   permissions:
     - staff.admin
     
-ignoreBlocks:
+## allows players to access containers through these blocks
+canClickThrough:
   - 1
   - REDSTONE_DUST
+  
+## doesn't check when accessing these containers
+containersToIgnore:
+  - DISPENSER
