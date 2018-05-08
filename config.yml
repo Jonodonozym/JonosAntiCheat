@@ -1,17 +1,45 @@
 notification:
   cooldownSeconds: 1
   opEnabled: true
-  fileLogging: true
-  consoleLogging: false
   permissionsEnabled: true
   permissions:
     - staff.admin
     
-## allows players to access containers through these blocks
-canClickThrough:
-  - 1
-  - REDSTONE_DUST
-  
-## doesn't check when accessing these containers
-containersToIgnore:
-  - DISPENSER
+banning:
+  lengthDays:
+    LIGHT: 4
+    MEDIUM: 7
+    HEAVY: 30
+  bansTilPerm:
+    LIGHT: 3      
+    MEDIUM: 2
+    HEAVY: 2
+  tempUnbanTier:
+    LIGHT: 1
+    MEDIUM: 1
+    HEAVY: 1
+  permUnbanTier: 2
+  reasons:
+    LIGHT:
+    MEDIUM: 
+    - XRay
+    - ESP
+    HEAVY:
+    - Aimbot
+    - Killaura
+
+logging: 
+  file: true
+  singleFile: true
+  console: false
+
+wallhack:
+  enabled: true
+  canClickThrough:
+    - REDSTONE_DUST
+  containersToIgnore:
+    - DISPENSER
+    
+civbreak:
+  enabled: true
+  leniency: 0.75

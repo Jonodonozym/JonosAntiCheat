@@ -1,6 +1,6 @@
-main: jdz.antifreecam.AntiFreecamPlugin
-name: AntiFreecam
+main: jdz.jac.JAC
+name: JAC
 version: 1.0
 author: Jonodonozym
-description: Prevents players from opening chests through walls via bugs or hacked clients
+description: Jono's Anticheat
 softdepend: [JBU]

@@ -2,7 +2,9 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/User/git/^^Libs/JBU.jar"/>
-	<classpathentry kind="lib" path="D:/User/git/^^Libs/spigot-1.8 R3.jar"/>
+	<classpathentry kind="lib" path="D:/User/git/^^Libs/Minecraft Plugins/JBU.jar"/>
+	<classpathentry kind="lib" path="D:/User/git/^^Libs/Minecraft Plugins/spigot-1.8 R3.jar"/>
+	<classpathentry kind="lib" path="D:/User/git/^^Libs/lombok.jar"/>
+	<classpathentry kind="lib" path="D:/User/git/^^Libs/Minecraft Plugins/GCBanz.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
