@@ -27,10 +27,13 @@ import jdz.bukkitUtils.misc.utils.MaterialUtils;
 import jdz.bukkitUtils.misc.utils.MaterialUtils.ResourceType;
 import jdz.bukkitUtils.misc.utils.MaterialUtils.ToolType;
 import jdz.jac.JAC;
-import jdz.jac.hackingEvent.HackEvent;
-import jdz.jac.hackingEvent.HackType;
+import jdz.jac.detection.HackEvent;
+import jdz.jac.detection.HackType;
+import jdz.jac.detection.Severity;
 
 public class CivBreakListener implements Listener {
+	private static final HackType HACKTYPE_CIV_BREAK = new HackType("CivBreak", "Broke the nexus too fast", Severity.HIGH, 100);
+	
 	private final Map<Player, Set<Block>> breakLock = new HashMap<Player, Set<Block>>();
 
 	@EventHandler
@@ -76,7 +79,7 @@ public class CivBreakListener implements Listener {
 
 		if (breakLock.get(event.getPlayer()).contains(event.getBlock())) {
 			event.setCancelled(true);
-			new HackEvent(event.getPlayer(), HackType.CIV_BREAK).call();
+			new HackEvent(event.getPlayer(), HACKTYPE_CIV_BREAK).call();
 		}
 	}
 

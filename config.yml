@@ -24,14 +24,20 @@ banning:
     MEDIUM: 
     - XRay
     - ESP
+    - autoarmor
+    - wallhack
     HEAVY:
     - Aimbot
     - Killaura
+    - Civbreak
 
 logging: 
   file: true
   singleFile: true
   console: false
+
+autoarmor:
+  enabled: true
 
 wallhack:
   enabled: true

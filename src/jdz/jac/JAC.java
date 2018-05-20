@@ -7,8 +7,10 @@ import jdz.jac.detection.civbreak.CivBreakConfig;
 import jdz.jac.detection.civbreak.CivBreakListener;
 import jdz.jac.detection.wallhack.WallhackConfig;
 import jdz.jac.detection.wallhack.WallhackListener;
+import jdz.jac.notifier.Notifier;
+import jdz.jac.notifier.NotifierConfig;
 import jdz.jac.punisher.Punisher;
-import jdz.jac.util.Notifier;
+import jdz.jac.punisher.PunisherConfig;
 import lombok.Getter;
 
 public class JAC extends JavaPlugin {
@@ -25,7 +27,9 @@ public class JAC extends JavaPlugin {
 		new WallhackListener().registerEvents(this);
 		
 		new Notifier().registerEvents(this);
+		new NotifierConfig().registerEvents(this);
 		
 		new Punisher().registerEvents(this);
+		new PunisherConfig().registerEvents(this);
 	}
 }
