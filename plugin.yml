@@ -4,3 +4,7 @@ version: 1.0
 author: Jonodonozym
 description: Jono's Anticheat
 softdepend: [JBU]
+
+permissions:
+  jac.admin:
+    default: op
