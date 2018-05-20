@@ -1,4 +1,4 @@
-package jdz.jac.hackingEvent;
+package jdz.jac.detection;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
