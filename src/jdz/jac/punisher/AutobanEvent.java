@@ -1,10 +1,11 @@
 
-package jdz.jac.hackingEvent;
+package jdz.jac.punisher;
 
 import org.bukkit.entity.Player;
 
 import jdz.bukkitUtils.events.Cancellable;
 import jdz.bukkitUtils.events.Event;
+import jdz.jac.detection.HackType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

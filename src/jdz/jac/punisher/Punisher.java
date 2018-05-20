@@ -13,9 +13,9 @@ import org.bukkit.event.EventPriority;
 
 import jdz.bukkitUtils.events.Listener;
 import jdz.jac.JAC;
-import jdz.jac.hackingEvent.HackEvent;
-import jdz.jac.hackingEvent.HackType;
-import jdz.jac.hackingEvent.Severity;
+import jdz.jac.detection.HackEvent;
+import jdz.jac.detection.HackType;
+import jdz.jac.detection.Severity;
 
 public class Punisher implements Listener {
 	private Map<HackType, Map<Player, Double>> percent = new HashMap<HackType, Map<Player, Double>>();
