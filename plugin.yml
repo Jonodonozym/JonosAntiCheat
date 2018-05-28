@@ -5,6 +5,11 @@ author: Jonodonozym
 description: Jono's Anticheat
 softdepend: [JBU]
 
+commands:
+  aac:
+    aliases: autoarmorcheck
+    permission: jac.admin
+
 permissions:
   jac.admin:
     default: op

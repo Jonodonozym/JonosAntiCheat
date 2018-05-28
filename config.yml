@@ -1,11 +1,27 @@
 notification:
   cooldownSeconds: 1
   opEnabled: true
+  consoleEnabled: true
   permissionsEnabled: true
   permissions:
     - staff.admin
+  broadcastAutobans: true
+  broadcastAutobansAdmin: true
+  autobanGloatMessages:
+    - "What a loser..."
+    - "Get wrecked mate"
+    - "Go hack on another server"
+    - "*inb4 an appeal is made*"
+    - "Alright, admins can calm down now"
+    - "Who needs admins when you've got JAC?"
+    - "*Cracks knuckles*"
+    - "And the crowd goes wild"
+    - "This autoban was brought to you by JAC™. We also make delicious ice cream."
+    - "Bets on whether or not this was an alt?"
     
 banning:
+  kickInstead: false
+  runCommands: true
   lengthDays:
     LIGHT: 4
     MEDIUM: 7
@@ -14,38 +30,36 @@ banning:
     LIGHT: 3      
     MEDIUM: 2
     HEAVY: 2
-  tempUnbanTier:
+  unbanTier:
     LIGHT: 1
     MEDIUM: 1
     HEAVY: 1
-  permUnbanTier: 2
-  reasons:
-    LIGHT:
-    MEDIUM: 
-    - XRay
-    - ESP
-    - autoarmor
-    - wallhack
-    HEAVY:
-    - Aimbot
-    - Killaura
-    - Civbreak
+    PERMANENT: 2
+    UNIQUE: 3
 
 logging: 
   file: true
   singleFile: true
   console: false
 
-autoarmor:
+AutoArmor:
   enabled: true
+  level: MEDIUM
+  autoban: false
+  autoequipTicks: 5
+  addPingToTicks: true
 
-wallhack:
+Wallhacks:
   enabled: true
+  level: MEDIUM
+  autoban: false
   canClickThrough:
     - REDSTONE_DUST
   containersToIgnore:
     - DISPENSER
     
-civbreak:
+CivBreak:
   enabled: true
+  level: PERMANENT
+  autoban: true
   leniency: 0.75
