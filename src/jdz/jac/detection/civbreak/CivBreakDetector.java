@@ -18,6 +18,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -31,10 +32,12 @@ import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
 
-public class CivBreakListener implements Listener {
-	private static final HackType HACKTYPE_CIV_BREAK = new HackType("CivBreak", "Broke the nexus too fast", Severity.HIGH, 100);
-	
+public class CivBreakDetector implements Listener {
+	private static final HackType HACKTYPE_CIV_BREAK = new HackType("CivBreak", "Broke the nexus too fast",
+			Severity.NORMAL, 20);
+
 	private final Map<Player, Set<Block>> breakLock = new HashMap<Player, Set<Block>>();
+	private final Set<Player> hasClicked = new HashSet<Player>();
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
@@ -42,7 +45,7 @@ public class CivBreakListener implements Listener {
 	}
 
 	@EventHandler
-	public void onQuit(PlayerJoinEvent event) {
+	public void onQuit(PlayerQuitEvent event) {
 		breakLock.remove(event.getPlayer());
 	}
 
@@ -61,6 +64,8 @@ public class CivBreakListener implements Listener {
 		if (!event.getClickedBlock().getType().equals(Material.ENDER_STONE))
 			return;
 
+		hasClicked.add(player);
+
 		int delay = (int) (getBreakTicks(player) * 0.75);
 		if (delay > 0) {
 			breakLock.get(player).add(event.getClickedBlock());
@@ -71,16 +76,19 @@ public class CivBreakListener implements Listener {
 		}
 	}
 
-
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
 	public void onClickBlock(BlockBreakEvent event) {
-		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE))
+		Player player = event.getPlayer();
+		if (player.getGameMode().equals(GameMode.CREATIVE))
 			return;
 
-		if (breakLock.get(event.getPlayer()).contains(event.getBlock())) {
+		if (breakLock.get(player).contains(event.getBlock())
+				|| (event.getBlock().getType() == Material.ENDER_STONE && !hasClicked.contains(player))) {
 			event.setCancelled(true);
-			new HackEvent(event.getPlayer(), HACKTYPE_CIV_BREAK).call();
+			new HackEvent(player, HACKTYPE_CIV_BREAK).call();
 		}
+
+		hasClicked.remove(player);
 	}
 
 	public int getBreakTicks(Player player) {
