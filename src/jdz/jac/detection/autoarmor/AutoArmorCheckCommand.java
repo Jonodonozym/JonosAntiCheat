@@ -16,24 +16,29 @@ import jdz.bukkitUtils.commands.annotations.CommandRequiredArgs;
 import jdz.bukkitUtils.commands.annotations.CommandUsage;
 
 @CommandLabel("aac")
+@CommandLabel("autoarmorcheck")
 @CommandRequiredArgs(1)
-@CommandUsage("aac {player} [strip|giveop]")
+@CommandUsage("{player}")
 @CommandPlayerOnly
 @CommandPermission("jac.admin")
-public class AutoArmorCheckCommand extends Command{
+public class AutoArmorCheckCommand extends Command {
 
 	@Override
 	public void execute(CommandSender sender, Set<String> flags, String... args) {
-		Player player = Bukkit.getPlayer(args[0]);
-		if (player == null || !player.isOnline()) {
-			sender.sendMessage(ChatColor.RED+"That player is not online!");
+		if (!sender.hasPermission("jac.admin")) {
+			sender.sendMessage(ChatColor.RED+"You are missing the permission node anni.npc");
 			return;
 		}
 		
-		if (args.length > 1 && args[1].toLowerCase().contains("give"))
-			AutoArmorVerifier.verifyGive(player);
-		else
-			AutoArmorVerifier.verifyStrip(player);
+		Player player = Bukkit.getPlayer(args[0]);
+		if (player == null || !player.isOnline()) {
+			sender.sendMessage(ChatColor.RED + "That player is not online!");
+			return;
+		}
+
+		sender.sendMessage(ChatColor.GOLD + "[JAC] Checking " + player.getName() + " for auto-armor...");
+
+		AutoArmorVerifier.verify(player);
 	}
 
 }

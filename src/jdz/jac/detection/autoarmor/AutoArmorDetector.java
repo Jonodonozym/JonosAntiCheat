@@ -1,6 +1,8 @@
 
 package jdz.jac.detection.autoarmor;
 
-public class AutoArmorDetector {
+import jdz.bukkitUtils.events.Listener;
+
+public class AutoArmorDetector implements Listener{
 
 }
