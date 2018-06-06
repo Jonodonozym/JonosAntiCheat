@@ -46,7 +46,7 @@ AutoArmor:
   enabled: true
   level: MEDIUM
   autoban: false
-  autoequipTicks: 5
+  autoequipTicks: 8
   addPingToTicks: true
 
 Wallhacks:
@@ -62,4 +62,4 @@ CivBreak:
   enabled: true
   level: PERMANENT
   autoban: true
-  leniency: 0.75
+  leniency: 0.7

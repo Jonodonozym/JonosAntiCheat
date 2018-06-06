@@ -29,7 +29,7 @@ public class Logger extends FileLogger {
 	}
 
 	private Logger(String logName) {
-		super(JAC.getInstance(), logName, LoggerConfig.isNewFile());
+		super(JAC.getInstance(), logName, !LoggerConfig.isNewFile());
 		setPrintToConsole(LoggerConfig.isConsoleLogging());
 		setWriteToLog(LoggerConfig.isFileLogging());
 		loggers.put(logName, this);

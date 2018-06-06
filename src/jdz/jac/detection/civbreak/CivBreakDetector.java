@@ -77,15 +77,19 @@ public class CivBreakDetector implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-	public void onClickBlock(BlockBreakEvent event) {
+	public void onBreakNexus(BlockBreakEvent event) {
 		Player player = event.getPlayer();
 		if (player.getGameMode().equals(GameMode.CREATIVE))
 			return;
 
-		if (breakLock.get(player).contains(event.getBlock())
-				|| (event.getBlock().getType() == Material.ENDER_STONE && !hasClicked.contains(player))) {
+		if (breakLock.get(player).contains(event.getBlock())) {
 			event.setCancelled(true);
-			new HackEvent(player, HACKTYPE_CIV_BREAK).call();
+			new HackEvent(player, HACKTYPE_CIV_BREAK, "(Speed)").call();
+		}
+
+		else if (event.getBlock().getType() == Material.ENDER_STONE && !hasClicked.contains(player)) {
+			event.setCancelled(true);
+			new HackEvent(player, HACKTYPE_CIV_BREAK, "(No Click)").call();
 		}
 
 		hasClicked.remove(player);
