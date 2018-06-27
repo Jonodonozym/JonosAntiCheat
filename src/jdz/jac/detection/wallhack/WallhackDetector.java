@@ -60,8 +60,7 @@ public class WallhackDetector implements Listener {
 	}
 
 	private void callEvent(Player player, Block block, HackType type) {
-		HackEvent event = new HackEvent(player, type);
-		event.setLoggerData(getBlockExtraData(player, block, type));
+		HackEvent event = new HackEvent(player, type, getBlockExtraData(player, block, type));
 		event.call();
 	}
 
