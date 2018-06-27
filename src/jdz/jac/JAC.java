@@ -11,6 +11,7 @@ import jdz.jac.detection.civbreak.CivBreakDetector;
 import jdz.jac.detection.wallhack.WallhackConfig;
 import jdz.jac.detection.wallhack.WallhackDetector;
 import jdz.jac.logger.LoggerConfig;
+import jdz.jac.logger.LoggerListener;
 import jdz.jac.notifier.Notifier;
 import jdz.jac.notifier.NotifierConfig;
 import jdz.jac.punisher.Punisher;
@@ -25,6 +26,7 @@ public class JAC extends JavaPlugin {
 		instance = this;
 		
 		new LoggerConfig().registerEvents(this);
+		new LoggerListener().registerEvents(this);
 		
 		new AutoArmorCheckCommand().register(this);
 		new AutoArmorConfig().registerEvents(this);
