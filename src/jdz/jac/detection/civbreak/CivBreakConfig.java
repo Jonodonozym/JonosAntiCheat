@@ -11,7 +11,6 @@ import lombok.Getter;
 
 public class CivBreakConfig implements Listener {
 	@Getter private static boolean enabled = true;
-	@Getter private static double leniency = 0.75;
 
 	@EventHandler
 	public void onConfigReload(ConfigReloadEvent event) {
@@ -21,6 +20,5 @@ public class CivBreakConfig implements Listener {
 		FileConfiguration config = event.getConfig();
 
 		enabled = config.getBoolean("civbreak.enabled", true);
-		leniency = config.getDouble("civbreak.leniency", 0.75);
 	}
 }
