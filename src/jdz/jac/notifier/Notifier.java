@@ -37,7 +37,7 @@ public class Notifier implements Listener {
 			cooldownHackers.remove(player);
 		}, NotifierConfig.getNotifyCooldownTicks());
 
-		broadcastNotification(player, type, event.getExtraData(), event.getLoggerData());
+		broadcastNotification(player, type, event.getExtraData(), event.getExtraData());
 	}
 
 	public static void broadcastNotification(Player cheater, HackType type, String extraData, String loggerData) {
@@ -63,7 +63,7 @@ public class Notifier implements Listener {
 		toNotify.sendMessage(format(cheater.getName() + " " + type.getActionDescription() + " " + extraData));
 		if (toNotify instanceof Player) {
 			Player player = (Player) toNotify;
-			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1f, 2f);
+			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1f, 2f);
 		}
 	}
 
