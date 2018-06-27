@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.experimental.Wither;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -17,14 +17,12 @@ import lombok.Setter;
 public class HackEvent extends Event implements Cancellable{
 	@Getter private final Player player;
 	@Getter private final HackType type;
-	@Getter private String extraData = "";
-	@Getter @Setter private String loggerData = "";
-	@Getter private double persistanceTicksModifier = 1;
-	@Getter private double severityModifier = 1;
+	@Getter private final String extraData;
+	@Wither @Getter private double persistanceTicksModifier = 1;
+	@Wither @Getter private double severityModifier = 1;
 	
-	public HackEvent(Player player, HackType type, String extraData) {
-		this(player, type);
-		this.loggerData = extraData;
+	public HackEvent(Player player, HackType type) {
+		this(player, type, "");
 	}
 	
 	@Override

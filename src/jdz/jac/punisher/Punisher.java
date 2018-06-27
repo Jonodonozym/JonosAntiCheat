@@ -37,7 +37,7 @@ public class Punisher implements Listener {
 			percent.get(type).put(player, 0D);
 
 		double change = (double) (type.getSeverity().ordinal()) / (double) Severity.values().length
-				* event.getSeverityModifier();
+				* event.getSeverityModifier() / 2D;
 
 		percent.get(type).put(player, percent.get(type).get(player) + change);
 
@@ -94,6 +94,7 @@ public class Punisher implements Listener {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tempban " + info);
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tempbanip " + info);
 		}
-
 	}
+	
+	
 }
