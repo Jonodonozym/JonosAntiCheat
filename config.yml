@@ -60,6 +60,5 @@ Wallhacks:
     
 CivBreak:
   enabled: true
-  level: PERMANENT
+  level: HEAVY
   autoban: true
-  leniency: 0.7
