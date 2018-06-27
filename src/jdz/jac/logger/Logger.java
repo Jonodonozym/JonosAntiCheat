@@ -47,6 +47,8 @@ public class Logger extends FileLogger {
 	public void onAutoban(AutobanEvent event) {
 		String timeString = event.isPerm() ? "permanently " : "for " + event.getDays() + " days";
 		general.log(event.getPlayer().getName() + " was autobanned " + timeString + "for " + event.getType().getName());
+		if (!event.getExtraData().equals(""))
+			general.log("Extra data:\t"+event.getExtraData());
 		if (event.isCancelled())
 			general.log("The autoban event was cancelled by a plugin");
 	}

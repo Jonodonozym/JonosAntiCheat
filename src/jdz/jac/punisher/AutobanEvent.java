@@ -9,17 +9,18 @@ import jdz.bukkitUtils.events.Event;
 import jdz.jac.detection.HackType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AutobanEvent extends Event implements Cancellable{
-	@Getter private final Player player;
-	@Getter private final HackType type;
+	private final Player player;
+	private final HackType type;
 	
-	@Getter private final int unbanTier;
-	@Getter private final int days;
-	@Getter private final boolean isPerm;
+	private final int unbanTier;
+	private final int days;
+	private final boolean isPerm;
+	
+	private String extraData;
 	
 	public static HandlerList getHandlerList() {
 		return getHandlers(AutobanEvent.class);

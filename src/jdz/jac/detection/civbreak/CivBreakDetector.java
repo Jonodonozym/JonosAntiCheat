@@ -12,6 +12,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import jdz.bukkitUtils.events.Listener;
 import jdz.jac.detection.HackEvent;
@@ -68,6 +69,9 @@ public class CivBreakDetector implements Listener {
 	public void onAutoban(AutobanEvent event){
 		if (!event.getType().equals(HACKTYPE_CIV_BREAK))
 			return;
+		
+		ItemStack handItem = event.getPlayer().getItemInHand();
+		event.setExtraData("Held item: "+handItem.getType());
 		
 		bannedPlayers.add(event.getPlayer());
 	}
