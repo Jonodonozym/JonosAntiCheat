@@ -1,10 +1,7 @@
 
 package jdz.jac.notifier;
 
-import static org.bukkit.ChatColor.BOLD;
-import static org.bukkit.ChatColor.GOLD;
-import static org.bukkit.ChatColor.RED;
-import static org.bukkit.ChatColor.RESET;
+import static org.bukkit.ChatColor.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +32,7 @@ public class Notifier implements Listener {
 		cooldownHackers.add(player);
 		Bukkit.getScheduler().runTaskLater(JAC.getInstance(), () -> {
 			cooldownHackers.remove(player);
-		}, NotifierConfig.getNotifyCooldownTicks());
+		}, NotifierConfig.getCooldownSeconds() * 20);
 
 		broadcastNotification(player, type, event.getExtraData(), event.getExtraData());
 	}
@@ -44,16 +41,16 @@ public class Notifier implements Listener {
 		for (Player notifier : Bukkit.getOnlinePlayers())
 			if (shouldNotify(notifier, cheater))
 				notify(notifier, cheater, type, extraData);
-		if (NotifierConfig.isNotifyConsole())
+		if (NotifierConfig.isConsoleEnabled())
 			notify(Bukkit.getConsoleSender(), cheater, type, loggerData);
 	}
 
 	public static boolean shouldNotify(Player player, Player cheater) {
 		if (player.isOp())
-			return NotifierConfig.isNotifyOP();
+			return NotifierConfig.isOpEnabled();
 		if (player.equals(cheater))
 			return false;
-		for (String permission : NotifierConfig.getNotifyPermissions())
+		for (String permission : NotifierConfig.getPermissions())
 			if (player.hasPermission(permission))
 				return true;
 		return false;

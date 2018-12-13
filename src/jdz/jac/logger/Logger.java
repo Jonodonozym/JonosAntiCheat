@@ -24,9 +24,9 @@ public class Logger extends FileLogger {
 	}
 
 	private Logger(String logName) {
-		super(JAC.getInstance(), logName, LoggerConfig.isNewFile());
-		setPrintToConsole(LoggerConfig.isConsoleLogging());
-		setWriteToLog(LoggerConfig.isFileLogging());
+		super(JAC.getInstance(), logName, !LoggerConfig.isSingleFile());
+		setPrintToConsole(LoggerConfig.isConsole());
+		setWriteToLog(LoggerConfig.isFile());
 		loggers.put(logName, this);
 	}
 }

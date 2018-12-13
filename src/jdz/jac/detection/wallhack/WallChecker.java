@@ -36,6 +36,6 @@ public class WallChecker {
 	}
 
 	private static boolean canClickThrough(Material mat) {
-		return !mat.isOccluding() || mat.isTransparent() || WallhackConfig.transparentMaterials.contains(mat);
+		return !mat.isOccluding() || mat.isTransparent() || WallhackConfig.getCanClickThrough().contains(mat);
 	}
 }

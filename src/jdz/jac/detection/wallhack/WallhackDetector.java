@@ -48,7 +48,7 @@ public class WallhackDetector implements Listener {
 		else
 			block = ((BlockState) holder).getBlock();
 
-		if (WallhackConfig.containersToIgnore.contains(block.getType()))
+		if (WallhackConfig.getContainersToIgnore().contains(block.getType()))
 			return;
 
 		Player player = (Player) event.getPlayer();

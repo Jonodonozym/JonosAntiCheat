@@ -1,35 +1,30 @@
 
 package jdz.jac.logger;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
+import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.events.Listener;
+import jdz.bukkitUtils.config.AutoConfig;
 import jdz.bukkitUtils.events.custom.ConfigReloadEvent;
-import jdz.jac.JAC;
-import lombok.AccessLevel;
 import lombok.Getter;
 
-public class LoggerConfig implements Listener {
-	@Getter(value = AccessLevel.PACKAGE) private static boolean newFile = false;
-	@Getter(value = AccessLevel.PACKAGE) private static boolean fileLogging = true;
-	@Getter(value = AccessLevel.PACKAGE) private static boolean consoleLogging = true;
+public class LoggerConfig extends AutoConfig {
+	@Getter private static boolean singleFile = false;
+	@Getter private static boolean file = true;
+	@Getter private static boolean console = true;
 
+	public LoggerConfig(Plugin plugin) {
+		super(plugin, "logging");
+	}
+	
 	@EventHandler
 	public void onConfigReload(ConfigReloadEvent event) {
-		if (!event.getPlugin().equals(JAC.getInstance()))
-			return;
-
-		FileConfiguration config = event.getConfig();
-
-		newFile = config.getBoolean("logging.singleFile");
-		fileLogging = config.getBoolean("logging.file");
-		consoleLogging = config.getBoolean("logging.console");
+		super.onConfigReload(event);
 
 		for (Logger logger : Logger.getAll()) {
-			logger.setNewLog(newFile);
-			logger.setWriteToLog(fileLogging);
-			logger.setPrintToConsole(consoleLogging);
+			logger.setNewLog(singleFile);
+			logger.setWriteToLog(file);
+			logger.setPrintToConsole(console);
 		}
 	}
 }

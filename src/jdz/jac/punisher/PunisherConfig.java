@@ -7,12 +7,12 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
+import org.bukkit.plugin.Plugin;
 
 import jdz.bukkitUtils.events.Listener;
 import jdz.bukkitUtils.events.custom.ConfigReloadEvent;
 import jdz.jac.JAC;
 import jdz.jac.detection.HackType;
-import lombok.AccessLevel;
 import lombok.Getter;
 
 public class PunisherConfig implements Listener {
@@ -22,8 +22,10 @@ public class PunisherConfig implements Listener {
 	private static final Map<BanLevel, Integer> unbanTier = new HashMap<BanLevel, Integer>();
 	private static final Map<BanLevel, Integer> bansTilPerm = new HashMap<BanLevel, Integer>();
 
-	@Getter(value = AccessLevel.PACKAGE) private static boolean runCommands = false;
-	@Getter(value = AccessLevel.PACKAGE) private static boolean kickInstead = false;
+	@Getter private static boolean runCommands = false;
+	@Getter private static boolean kickInstead = false;
+
+	public PunisherConfig(Plugin plugin) {}
 
 	static BanLevel getBanLevel(HackType type) {
 		if (!hackTypeToBanLevel.containsKey(type))

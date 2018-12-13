@@ -24,24 +24,24 @@ public class JAC extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
-		
-		new LoggerConfig().registerEvents(this);
+
+		new LoggerConfig(this).registerEvents(this);
 		new LoggerListener().registerEvents(this);
-		
+
 		new AutoArmorCheckCommand().register(this);
-		new AutoArmorConfig().registerEvents(this);
+		new AutoArmorConfig(this).registerEvents(this);
 		new AutoArmorDetector().registerEvents(this);
 
 		new CivBreakDetector().registerEvents(this);
-		new CivBreakConfig().registerEvents(this);
-		
-		new WallhackConfig().registerEvents(this);
+		new CivBreakConfig(this).registerEvents(this);
+
+		new WallhackConfig(this).registerEvents(this);
 		new WallhackDetector().registerEvents(this);
-		
+
 		new Notifier().registerEvents(this);
-		new NotifierConfig().registerEvents(this);
-		
+		new NotifierConfig(this).registerEvents(this);
+
 		new Punisher().registerEvents(this);
-		new PunisherConfig().registerEvents(this);
+		new PunisherConfig(this).registerEvents(this);
 	}
 }
