@@ -25,38 +25,44 @@ public class WallhackDetector implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
 	public void onInventoryOpenEvent(InventoryOpenEvent event) {
-		InventoryHolder holder;
+		Player player = (Player) event.getPlayer();
 
-		try {
-			holder = event.getInventory().getHolder();
-		}
-		catch (Exception ex) {
+		InventoryHolder holder = event.getInventory().getHolder();
+		if (holder == null)
 			return;
-		}
 
 		Block block = null;
-		Block connectedChest = null;
 
 		if (holder instanceof DoubleChest) {
-			InventoryHolder holder2 = ((DoubleChest) holder).getLeftSide();
-			block = ((BlockState) holder2).getBlock();
-			holder2 = ((DoubleChest) holder).getRightSide();
-			connectedChest = ((BlockState) holder2).getBlock();
+			DoubleChest chest = (DoubleChest) holder;
+			block = ((BlockState) chest.getLeftSide()).getBlock();
+			if (canOpenDoubleChest(player, chest))
+				return;
 		}
-		else if (!(holder instanceof BlockState))
-			return;
-		else
+		else if (holder instanceof BlockState) {
 			block = ((BlockState) holder).getBlock();
-
-		if (WallhackConfig.getContainersToIgnore().contains(block.getType()))
+			if (canOpen(player, block))
+				return;
+		}
+		else
 			return;
 
-		Player player = (Player) event.getPlayer();
-		if (WallChecker.isWallBetween(player, block)
-				&& (connectedChest == null || WallChecker.isWallBetween(player, connectedChest))) {
-			event.setCancelled(true);
-			callEvent(player, block, HACKTYPE_OPEN_CONTAINER);
-		}
+		event.setCancelled(true);
+		callEvent(player, block, HACKTYPE_OPEN_CONTAINER);
+	}
+
+	private boolean canOpenDoubleChest(Player player, DoubleChest chest) {
+		Block left = ((BlockState) chest.getLeftSide()).getBlock();
+		Block right = ((BlockState) chest.getLeftSide()).getBlock();
+
+		return !(canOpen(player, left) && canOpen(player, right));
+	}
+
+	private boolean canOpen(Player player, Block block) {
+		if (WallhackConfig.getContainersToIgnore().contains(block.getType()))
+			return true;
+
+		return WallChecker.isWallBetween(player, block);
 	}
 
 	private void callEvent(Player player, Block block, HackType type) {
