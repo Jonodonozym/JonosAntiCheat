@@ -29,4 +29,9 @@ public class Logger extends FileLogger {
 		setWriteToLog(LoggerConfig.isFile());
 		loggers.put(logName, this);
 	}
+	
+	@Override
+	public String getLogDirectory() {
+		return JAC.getInstance().getStorageFolder().getAbsolutePath();
+	}
 }
