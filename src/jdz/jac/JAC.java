@@ -20,15 +20,19 @@ import lombok.Getter;
 
 public class JAC extends JavaPlugin {
 	@Getter private static JAC instance;
+	private static JACCommandExecutor commands;
 
 	@Override
 	public void onEnable() {
 		instance = this;
+		
+		commands = new JACCommandExecutor(this);
+		commands.register();
 
 		new LoggerConfig(this).registerEvents(this);
 		new LoggerListener().registerEvents(this);
 
-		new AutoArmorCheckCommand().register(this);
+		commands.add(new AutoArmorCheckCommand());
 		new AutoArmorConfig(this).registerEvents(this);
 		new AutoArmorDetector().registerEvents(this);
 

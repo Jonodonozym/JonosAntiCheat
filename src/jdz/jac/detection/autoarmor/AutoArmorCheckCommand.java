@@ -4,7 +4,7 @@ package jdz.jac.detection.autoarmor;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import jdz.bukkitUtils.commands.Command;
+import jdz.bukkitUtils.commands.SubCommand;
 import jdz.bukkitUtils.commands.annotations.CommandLabel;
 import jdz.bukkitUtils.commands.annotations.CommandMethod;
 import jdz.bukkitUtils.commands.annotations.CommandPermission;
@@ -16,7 +16,7 @@ import jdz.bukkitUtils.commands.annotations.CommandUsage;
 @CommandRequiredArgs(1)
 @CommandUsage("{player}")
 @CommandPermission("jac.admin")
-public class AutoArmorCheckCommand extends Command {
+public class AutoArmorCheckCommand extends SubCommand {
 
 	@CommandMethod
 	public void execute(Player sender, Player target) {
