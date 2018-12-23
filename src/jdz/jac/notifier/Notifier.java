@@ -64,8 +64,10 @@ public class Notifier implements Listener {
 		}
 	}
 
-	private static String format(String message) {
-		return RED + "[" + BOLD + GOLD + "JAC" + RESET + RED + "]" + GOLD + " " + message;
+	private static String[] format(String message) {
+		String[] lines = message.split("\n");
+		lines[0] = RED + "[" + BOLD + GOLD + "JAC" + RESET + RED + "]" + GOLD + " " + lines[0];
+		return lines;
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
