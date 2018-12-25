@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import jdz.bukkitUtils.events.Listener;
 import jdz.bukkitUtils.misc.utils.MaterialUtils;
 import jdz.jac.JAC;
-import jdz.jac.utils.PlayerPing;
+import jdz.jac.detection.pingCompensation.PingFetcher;
 
 public class AutoArmorDetector implements Listener {
 	private final Set<Player> equipedOne = new HashSet<Player>();
@@ -29,7 +29,7 @@ public class AutoArmorDetector implements Listener {
 		if (checked.contains(player))
 			return;
 
-		int ping = PlayerPing.getPing(player);
+		int ping = PingFetcher.getPing(player);
 		int pingTicks = (int) Math.ceil(ping / 50D);
 		int slot = MaterialUtils.getArmourType(stack.getType()).ordinal();
 		ItemStack item = player.getEquipment().getArmorContents()[slot];

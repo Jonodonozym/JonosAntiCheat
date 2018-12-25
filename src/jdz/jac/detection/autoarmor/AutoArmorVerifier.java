@@ -11,7 +11,7 @@ import jdz.jac.JAC;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
-import jdz.jac.utils.PlayerPing;
+import jdz.jac.detection.pingCompensation.PingFetcher;
 
 public class AutoArmorVerifier {
 	private static HackType HACKTYPE_AUTO_ARMOR = new HackType("AutoArmor", "equiped items too fast!", Severity.NORMAL,
@@ -40,7 +40,7 @@ public class AutoArmorVerifier {
 			player.getInventory().setItem(i + 27, equipment[i]);
 		player.getInventory().setArmorContents(null);
 
-		int ping = PlayerPing.getPing(player);
+		int ping = PingFetcher.getPing(player);
 		int ticks = AutoArmorConfig.getAutoequipTicks() + (ping / 25);
 
 		Bukkit.getScheduler().runTaskLater(JAC.getInstance(), () -> {

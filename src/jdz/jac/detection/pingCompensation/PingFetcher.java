@@ -1,5 +1,5 @@
 
-package jdz.jac.utils;
+package jdz.jac.detection.pingCompensation;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import jdz.bukkitUtils.misc.ReflectionUtils;
 
-public class PlayerPing {
+public class PingFetcher {
 	public static int getPing(Player player) {
 		try {
 			Class<?> craftPlayer = ReflectionUtils.getClass("entity.CraftPlayer");
