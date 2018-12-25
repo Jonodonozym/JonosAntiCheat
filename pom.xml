@@ -14,6 +14,17 @@
 		<finalName>JAC</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
+		<resources>
+			<resource>
+				<targetPath>.</targetPath>
+				<filtering>true</filtering>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>plugin.yml</include>
+					<include>config.yml</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -46,6 +57,25 @@
 				<configuration>
 					<outputDirectory>D:\User\git\^^Libs\Minecraft Plugins</outputDirectory>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<copy
+									file="D:\User\git\^^Libs\Minecraft Plugins\${project.build.finalName}.jar"
+									todir="D:\MC Servers\IJRJPGVPWX\plugins" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -86,7 +116,7 @@
 			<scope>system</scope>
 			<systemPath>D:\User\git\^^Libs\Minecraft Plugins\JBU.jar</systemPath>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.guildcraft.gcbanz</groupId>
 			<artifactId>GCBanz</artifactId>

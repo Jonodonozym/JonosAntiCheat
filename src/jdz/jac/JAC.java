@@ -1,13 +1,19 @@
 
 package jdz.jac;
 
+import java.io.File;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
+import jdz.jac.detection.aimbot.AimbotConfig;
+import jdz.jac.detection.aimbot.AimbotDetector;
+import jdz.jac.detection.aimbot.command.AimbotCommandExecutor;
 import jdz.jac.detection.autoarmor.AutoArmorCheckCommand;
 import jdz.jac.detection.autoarmor.AutoArmorConfig;
 import jdz.jac.detection.autoarmor.AutoArmorDetector;
 import jdz.jac.detection.civbreak.CivBreakConfig;
 import jdz.jac.detection.civbreak.CivBreakDetector;
+import jdz.jac.detection.pingCompensation.PlayerLocationHistory;
 import jdz.jac.detection.wallhack.WallhackConfig;
 import jdz.jac.detection.wallhack.WallhackDetector;
 import jdz.jac.logger.LoggerConfig;
@@ -25,27 +31,42 @@ public class JAC extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
-		
-		commands = new JACCommandExecutor(this);
-		commands.register();
 
-		new LoggerConfig(this).registerEvents(this);
 		new LoggerListener().registerEvents(this);
-
-		commands.add(new AutoArmorCheckCommand());
-		new AutoArmorConfig(this).registerEvents(this);
-		new AutoArmorDetector().registerEvents(this);
-
-		new CivBreakDetector().registerEvents(this);
-		new CivBreakConfig(this).registerEvents(this);
-
-		new WallhackConfig(this).registerEvents(this);
-		new WallhackDetector().registerEvents(this);
+		new LoggerConfig(this).register();
 
 		new Notifier().registerEvents(this);
-		new NotifierConfig(this).registerEvents(this);
+		new NotifierConfig(this).register();
 
 		new Punisher().registerEvents(this);
 		new PunisherConfig(this).registerEvents(this);
+		
+		PlayerLocationHistory.init(this);
+
+		commands = new JACCommandExecutor(this);
+		commands.register();
+
+		new AutoArmorDetector().registerEvents(this);
+		new AutoArmorConfig(this).register();
+		commands.add(new AutoArmorCheckCommand());
+
+		new CivBreakDetector().registerEvents(this);
+		new CivBreakConfig(this).register();
+
+		new WallhackDetector().registerEvents(this);
+		new WallhackConfig(this).register();
+
+		new AimbotDetector(this).registerEvents(this);
+		new AimbotConfig(this).register();
+		commands.add(new AimbotCommandExecutor(commands));
+	}
+
+	public File getStorageFolder() {
+		File serverRoot = getDataFolder().getAbsoluteFile().getParentFile().getParentFile();
+		File serverList = serverRoot.getParentFile();
+		File storageFolder = new File(serverList, "JAC" + File.separator + getServer().getName());
+		if (!storageFolder.exists())
+			storageFolder.mkdirs();
+		return storageFolder;
 	}
 }
