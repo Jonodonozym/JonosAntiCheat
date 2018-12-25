@@ -41,12 +41,16 @@ public class AimbotDetector implements Listener {
 		if (!shouldCheck(event.getPlayer()))
 			return;
 
+		lastChecks.put(event.getPlayer(), System.currentTimeMillis());
+
 		AimbotClassifier.classify(event.getPlayer(), (result) -> {
 			if (allowedClasses.contains(result.getBestMatched()))
 				return;
 
 			new HackEvent(event.getPlayer(), AIMBOT_HACKTYPE,
 					"\n\t type: " + result.getBestMatched() + "\n\t dist: " + result.getDistance()).call();
+
+			lastChecks.remove(event.getPlayer());
 		}, () -> {}, 15);
 	}
 
