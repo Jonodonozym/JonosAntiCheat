@@ -8,6 +8,8 @@ softdepend: [JBU]
 commands:
   jac:
     permission: jac.admin
+  ping:
+  pingtop:
 
 permissions:
   jac.admin:

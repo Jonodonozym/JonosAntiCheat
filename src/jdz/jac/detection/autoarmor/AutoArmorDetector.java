@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import jdz.bukkitUtils.events.Listener;
 import jdz.bukkitUtils.misc.utils.MaterialUtils;
 import jdz.jac.JAC;
-import jdz.jac.detection.pingCompensation.PingFetcher;
+import jdz.jac.ping.PingFetcher;
 
 public class AutoArmorDetector implements Listener {
 	private final Set<Player> equipedOne = new HashSet<Player>();

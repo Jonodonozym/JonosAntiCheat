@@ -11,7 +11,7 @@ import jdz.jac.JAC;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
-import jdz.jac.detection.pingCompensation.PingFetcher;
+import jdz.jac.ping.PingFetcher;
 
 public class AutoArmorVerifier {
 	private static HackType HACKTYPE_AUTO_ARMOR = new HackType("AutoArmor", "equiped items too fast!", Severity.NORMAL,

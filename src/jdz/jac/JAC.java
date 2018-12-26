@@ -20,6 +20,9 @@ import jdz.jac.logger.LoggerConfig;
 import jdz.jac.logger.LoggerListener;
 import jdz.jac.notifier.Notifier;
 import jdz.jac.notifier.NotifierConfig;
+import jdz.jac.ping.PingCommand;
+import jdz.jac.ping.PingTop;
+import jdz.jac.ping.PingTopCommand;
 import jdz.jac.punisher.Punisher;
 import jdz.jac.punisher.PunisherConfig;
 import lombok.Getter;
@@ -42,6 +45,10 @@ public class JAC extends JavaPlugin {
 		new PunisherConfig(this).registerEvents(this);
 		
 		PlayerLocationHistory.init(this);
+		
+		PingTop.startUpdater();
+		new PingCommand().register(this);
+		new PingTopCommand().register(this);
 
 		commands = new JACCommandExecutor(this);
 		commands.register();

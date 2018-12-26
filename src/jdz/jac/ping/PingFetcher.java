@@ -1,5 +1,5 @@
 
-package jdz.jac.detection.pingCompensation;
+package jdz.jac.ping;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
