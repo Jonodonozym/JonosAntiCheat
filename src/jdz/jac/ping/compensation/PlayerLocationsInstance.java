@@ -1,5 +1,5 @@
 
-package jdz.jac.detection.pingCompensation;
+package jdz.jac.ping.compensation;
 
 import java.util.HashMap;
 import java.util.Map;
