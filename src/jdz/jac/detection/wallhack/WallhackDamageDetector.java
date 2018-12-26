@@ -37,24 +37,25 @@ public class WallhackDamageDetector implements Listener {
 
 		Location targetLoc = PlayerLocationHistory.getLocationFromPerspective(player, target);
 		Location targetEyeLoc = PlayerLocationHistory.getEyeLocationFromPerspective(player, target);
+		Location blockLoc = block.getLocation().add(0.5, 0.5, 0.5);
 
 		double d1 = eyeLoc.distance(targetLoc);
 		double d2 = eyeLoc.distance(targetEyeLoc);
-		double d3 = eyeLoc.distance(block.getLocation());
+		double d3 = eyeLoc.distance(blockLoc);
 
 		if (d3 > d1 && d3 > d2) {
 			event.setCancelled(true);
-			new HackEvent(player, HACKTYPE_HIT_PLAYER, getExtraData(player, targetLoc, targetEyeLoc, block, d1, d2, d3))
-					.call();
+			new HackEvent(player, HACKTYPE_HIT_PLAYER,
+					getExtraData(player, targetLoc, targetEyeLoc, blockLoc, d1, d2, d3)).call();
 		}
 	}
 
-	private String getExtraData(Player hacker, Location targetLocation, Location targetEyeLocation, Block block,
+	private String getExtraData(Player hacker, Location targetLocation, Location targetEyeLocation, Location blockLoc,
 			double d1, double d2, double d3) {
 		return hacker.getName() + " " + HACKTYPE_HIT_PLAYER.getActionDescription() + "\n\tPlayer eye location: "
 				+ WorldUtils.locationToLegibleString(hacker.getEyeLocation()) + "\n\target location: "
 				+ WorldUtils.locationToLegibleString(targetLocation) + "\n\target eye location: "
 				+ WorldUtils.locationToLegibleString(targetEyeLocation) + "\n\tPlayer block in sight: "
-				+ WorldUtils.locationToLegibleString(block.getLocation()) + "\n\t(" + d1 + "," + d2 + "," + d3 + ")";
+				+ WorldUtils.locationToLegibleString(blockLoc) + "\n\t(" + d1 + "," + d2 + "," + d3 + ")";
 	}
 }
