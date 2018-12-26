@@ -5,6 +5,7 @@ import java.io.File;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import jdz.jac.detection.TypeEnabledConfig;
 import jdz.jac.detection.aimbot.AimbotConfig;
 import jdz.jac.detection.aimbot.AimbotDetector;
 import jdz.jac.detection.aimbot.command.AimbotCommandExecutor;
@@ -14,7 +15,7 @@ import jdz.jac.detection.autoarmor.AutoArmorDetector;
 import jdz.jac.detection.civbreak.CivBreakConfig;
 import jdz.jac.detection.civbreak.CivBreakDetector;
 import jdz.jac.detection.wallhack.WallhackConfig;
-import jdz.jac.detection.wallhack.WallhackDetector;
+import jdz.jac.detection.wallhack.WallhackDamageDetector;
 import jdz.jac.logger.LoggerConfig;
 import jdz.jac.logger.LoggerListener;
 import jdz.jac.notifier.Notifier;
@@ -52,6 +53,8 @@ public class JAC extends JavaPlugin {
 
 		commands = new JACCommandExecutor(this);
 		commands.register();
+		
+		new TypeEnabledConfig().registerEvents(this);
 
 		new AutoArmorDetector().registerEvents(this);
 		new AutoArmorConfig(this).register();
@@ -60,7 +63,7 @@ public class JAC extends JavaPlugin {
 		new CivBreakDetector().registerEvents(this);
 		new CivBreakConfig(this).register();
 
-		new WallhackDetector().registerEvents(this);
+		new WallhackDamageDetector().registerEvents(this);
 		new WallhackConfig(this).register();
 
 		new AimbotDetector(this).registerEvents(this);

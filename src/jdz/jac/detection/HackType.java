@@ -3,17 +3,13 @@ package jdz.jac.detection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventPriority;
 
-import jdz.bukkitUtils.misc.Config;
-import jdz.jac.JAC;
 import lombok.Data;
 import lombok.Getter;
 
 @Data
 public class HackType {
-	private static final FileConfiguration enabledConfig = Config.getConfig(JAC.getInstance());
 	@Getter private static final Set<HackType> allTypes = new HashSet<HackType>();
 
 	private final String name;
@@ -37,6 +33,6 @@ public class HackType {
 	}
 
 	public boolean isEnabled() {
-		return enabledConfig.getBoolean(name + ".enabled", true);
+		return TypeEnabledConfig.isEnabled(this);
 	}
 }
