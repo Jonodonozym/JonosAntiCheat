@@ -23,9 +23,16 @@ public class PlayerLocationHistory {
 	}
 
 	public static Location getLocationFromPerspective(Player player, Player target) {
+		return getInstanceFromPerspective(player, target).getLocation(player);
+	}
+
+	public static Location getEyeLocationFromPerspective(Player player, Player target) {
+		return getInstanceFromPerspective(player, target).getEyeLocation(player);
+	}
+	
+	public static PlayerLocationsInstance getInstanceFromPerspective(Player player, Player target) {
 		int ping = PingFetcher.getPing(player);
-		PlayerLocationsInstance instance = getEarliestInstanceContaining(target, ping / 50);
-		return instance.getLocation(player);
+		return getEarliestInstanceContaining(target, ping / 50);
 	}
 
 	private static PlayerLocationsInstance getEarliestInstanceContaining(Player player, int maxTicksAgo) {

@@ -37,7 +37,7 @@ public class PlayerLocationsInstance {
 		Map<Player, Location> eyeLocs = new HashMap<>();
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			locs.put(player, player.getLocation());
-			locs.put(player, player.getEyeLocation());
+			eyeLocs.put(player, player.getEyeLocation());
 		}
 		return new PlayerLocationsInstance(locs, eyeLocs, System.currentTimeMillis());
 	}

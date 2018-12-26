@@ -16,12 +16,9 @@ import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
 
-public class WallhackDetector implements Listener {
+public class WallhackContainerDetector implements Listener {
 	private static final HackType HACKTYPE_OPEN_CONTAINER = new HackType("Wallhacks",
 			"Tried to open a container through a wall", Severity.HIGH, 50);
-
-	@SuppressWarnings("unused") private static final HackType HACKTYPE_HIT_PLAYER = new HackType("Wallhacks",
-			"Tried to hit a player through a wall", Severity.HIGH, 200); // TODO implement this
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
 	public void onInventoryOpenEvent(InventoryOpenEvent event) {
