@@ -9,6 +9,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import jdz.jac.ping.PingFetcher;
+
 public class PlayerLocationHistory {
 	private static List<PlayerLocationsInstance> history = new ArrayList<>();
 
@@ -20,20 +22,10 @@ public class PlayerLocationHistory {
 		}, 0, 1);
 	}
 
-	public static Location getLocationMSAgo(Player player, int ms) {
-		return getLocationTicksAgo(player, ms / 50);
-	}
-
-	public static Location getLocationTicksAgo(Player player, int ticksAgo) {
-		return getEarliestInstanceContaining(player, ticksAgo).getLocation(player);
-	}
-
-	public static Location getEyeLocationMSAgo(Player player, int ms) {
-		return getEyeLocationTicksAgo(player, ms / 50);
-	}
-
-	public static Location getEyeLocationTicksAgo(Player player, int ticksAgo) {
-		return getEarliestInstanceContaining(player, ticksAgo).getEyeLocation(player);
+	public static Location getLocationFromPerspective(Player player, Player target) {
+		int ping = PingFetcher.getPing(player);
+		PlayerLocationsInstance instance = getEarliestInstanceContaining(target, ping / 50);
+		return instance.getLocation(player);
 	}
 
 	private static PlayerLocationsInstance getEarliestInstanceContaining(Player player, int maxTicksAgo) {

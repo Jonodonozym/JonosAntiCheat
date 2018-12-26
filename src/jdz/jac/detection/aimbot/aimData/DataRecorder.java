@@ -12,7 +12,6 @@ import org.bukkit.util.Vector;
 import jdz.bukkitUtils.events.Listener;
 import jdz.bukkitUtils.misc.CombatTimer;
 import jdz.jac.detection.pingCompensation.PlayerLocationHistory;
-import jdz.jac.ping.PingFetcher;
 
 public class DataRecorder implements Listener {
 	private static CombatTimer timer;
@@ -59,10 +58,8 @@ public class DataRecorder implements Listener {
 
 		Vector entityLoc = target.getLocation().toVector();
 
-		if (target instanceof Player) {
-			int ping = PingFetcher.getPing(player);
-			entityLoc = PlayerLocationHistory.getLocationMSAgo(player, ping).toVector();
-		}
+		if (target instanceof Player)
+			entityLoc = PlayerLocationHistory.getLocationFromPerspective(player, (Player) target).toVector();
 
 		Vector playerEntityVec = entityLoc.subtract(playerEyeLoc);
 
