@@ -35,8 +35,8 @@ public class WallhackDamageDetector implements Listener {
 
 		Location eyeLoc = player.getEyeLocation();
 
-		Location targetLoc = PlayerLocationHistory.getLocationFromPerspective(player, target);
-		Location targetEyeLoc = PlayerLocationHistory.getEyeLocationFromPerspective(player, target);
+		Location targetLoc = PlayerLocationHistory.getLocationFromPerspective(target, player);
+		Location targetEyeLoc = PlayerLocationHistory.getEyeLocationFromPerspective(target, player);
 		Location blockLoc = block.getLocation().add(0.5, 0.5, 0.5);
 
 		double d1 = eyeLoc.distance(targetLoc);

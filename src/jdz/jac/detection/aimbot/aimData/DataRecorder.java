@@ -59,7 +59,7 @@ public class DataRecorder implements Listener {
 		Vector entityLoc = target.getLocation().toVector();
 
 		if (target instanceof Player)
-			entityLoc = PlayerLocationHistory.getLocationFromPerspective(player, (Player) target).toVector();
+			entityLoc = PlayerLocationHistory.getLocationFromPerspective((Player) target, player).toVector();
 
 		Vector playerEntityVec = entityLoc.subtract(playerEyeLoc);
 

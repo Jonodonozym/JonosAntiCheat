@@ -22,15 +22,15 @@ public class PlayerLocationHistory {
 		}, 0, 1);
 	}
 
-	public static Location getLocationFromPerspective(Player player, Player target) {
-		return getInstanceFromPerspective(player, target).getLocation(player);
+	public static Location getLocationFromPerspective(Player target, Player player) {
+		return getInstanceOfFromPerspective(target, player).getLocation(target);
 	}
 
-	public static Location getEyeLocationFromPerspective(Player player, Player target) {
-		return getInstanceFromPerspective(player, target).getEyeLocation(player);
+	public static Location getEyeLocationFromPerspective(Player target, Player player) {
+		return getInstanceOfFromPerspective(target, player).getEyeLocation(target);
 	}
-	
-	public static PlayerLocationsInstance getInstanceFromPerspective(Player player, Player target) {
+
+	public static PlayerLocationsInstance getInstanceOfFromPerspective(Player target, Player player) {
 		int ping = PingFetcher.getPing(player);
 		return getEarliestInstanceContaining(target, ping / 50);
 	}
