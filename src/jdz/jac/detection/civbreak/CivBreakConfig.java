@@ -8,7 +8,7 @@ import lombok.Getter;
 
 public class CivBreakConfig extends AutoConfig {
 	@Getter private static boolean enabled = true;
-	
+
 	public CivBreakConfig(Plugin plugin) {
 		super(plugin, "civbreak");
 	}

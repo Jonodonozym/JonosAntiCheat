@@ -2,6 +2,7 @@
 package jdz.jac.detection.aimbot;
 
 import static jdz.jac.detection.aimbot.AimbotConfig.minCheckClicks;
+import static jdz.jac.utils.Messager.message;
 import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.YELLOW;
 
@@ -19,10 +20,10 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * Re-assembly of NascentNova's machine learning detection
- * 
+ *
  * https://www.spigotmc.org/threads/machine-learning-killaura-detection-in-minecraft.301609/
  * https://github.com/Nova41/SnowLeopard
- * 
+ *
  * TODO info commands, add automatic checking, wire all
  * together
  */
@@ -81,9 +82,9 @@ public class AimbotClassifier {
 	}
 
 	public static void sendInfoToPlayer(Player p) {
-		p.sendMessage(AQUA + "  Neural network: ");
-		p.sendMessage("   Input layer size: " + YELLOW + lvq.getInputLayerSize());
-		p.sendMessage("   Output layer size: " + YELLOW + lvq.getOutputLayerSize());
+		message(p, AQUA + "  Neural network: ");
+		message(p, "   Input layer size: " + YELLOW + lvq.getInputLayerSize());
+		message(p, "   Output layer size: " + YELLOW + lvq.getOutputLayerSize());
 		lvq.printOutputLayers();
 		DataIO.sendInfoToPlayer(p);
 	}

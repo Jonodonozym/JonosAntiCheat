@@ -1,5 +1,12 @@
 package jdz.jac.ping;
 
+import static org.bukkit.ChatColor.GRAY;
+import static org.bukkit.ChatColor.GREEN;
+import static org.bukkit.ChatColor.LIGHT_PURPLE;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.entity.Player;
 
 import jdz.bukkitUtils.commands.Command;
@@ -9,10 +16,6 @@ import jdz.bukkitUtils.misc.Pair;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;
-import static org.bukkit.ChatColor.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @CommandLabel("pingtop")
 public class PingTopCommand extends Command {
@@ -33,10 +36,10 @@ public class PingTopCommand extends Command {
 		if (pageIndex > maxPages)
 			pageIndex = maxPages;
 
-		List<String> messages = new ArrayList<String>();
+		List<String> messages = new ArrayList<>();
 
-		messages.add(GRAY + "======== " + GOLD + "Pingtop " + GREEN + "Page " + (pageIndex + 1) + "/" + (maxPages + 1)
-				+ GRAY + " =======");
+		messages.add(GRAY + "======== " + "Pingtop " + GREEN + "Page " + (pageIndex + 1) + "/" + (maxPages + 1) + GRAY
+				+ " =======");
 
 		if (sender instanceof Player) {
 			int index = PingTop.getPosition(sender);
@@ -58,8 +61,7 @@ public class PingTopCommand extends Command {
 
 	private String getLine(int rank) {
 		Pair<Player, Integer> entry = PingTop.getByRank(rank);
-		String s = GOLD + "[" + (rank + 1) + "] " + GREEN + entry.getKey().getName() + LIGHT_PURPLE + " "
-				+ entry.getValue();
+		String s = "[" + (rank + 1) + "] " + GREEN + entry.getKey().getName() + LIGHT_PURPLE + " " + entry.getValue();
 		return s;
 	}
 
@@ -67,14 +69,14 @@ public class PingTopCommand extends Command {
 		TextComponent border = new TextComponent(GRAY + "========");
 		TextComponent previous, next;
 		if (pageIndex > 0) {
-			previous = new TextComponent(GOLD + "[<<<<]");
+			previous = new TextComponent("[<<<<]");
 			previous.setClickEvent(new ClickEvent(Action.RUN_COMMAND, "/pingtop " + (pageIndex - 1)));
 		}
 		else
 			previous = new TextComponent(GRAY + "======");
 
 		if (pageIndex < maxPages) {
-			next = new TextComponent(GOLD + " [>>>>] ");
+			next = new TextComponent(" [>>>>] ");
 			next.setClickEvent(new ClickEvent(Action.RUN_COMMAND, "/pingtop " + (pageIndex + 1)));
 		}
 		else

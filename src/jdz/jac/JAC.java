@@ -44,16 +44,16 @@ public class JAC extends JavaPlugin {
 
 		new Punisher().registerEvents(this);
 		new PunisherConfig(this).registerEvents(this);
-		
+
 		PlayerLocationHistory.init(this);
-		
+
 		PingTop.startUpdater();
 		new PingCommand().register(this);
 		new PingTopCommand().register(this);
 
 		commands = new JACCommandExecutor(this);
 		commands.register();
-		
+
 		new TypeEnabledConfig().registerEvents(this);
 
 		new AutoArmorDetector().registerEvents(this);

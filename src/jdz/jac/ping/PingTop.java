@@ -13,8 +13,8 @@ import jdz.bukkitUtils.misc.Pair;
 import jdz.jac.JAC;
 
 public class PingTop {
-	private static List<Pair<Player, Integer>> top = new ArrayList<Pair<Player, Integer>>();
-	private static Map<Player, Integer> positions = new HashMap<Player, Integer>();
+	private static List<Pair<Player, Integer>> top = new ArrayList<>();
+	private static Map<Player, Integer> positions = new HashMap<>();
 
 	public static void startUpdater() {
 		Bukkit.getScheduler().runTaskTimerAsynchronously(JAC.getInstance(), () -> {

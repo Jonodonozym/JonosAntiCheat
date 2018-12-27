@@ -16,8 +16,8 @@ import jdz.jac.JAC;
 import jdz.jac.ping.PingFetcher;
 
 public class AutoArmorDetector implements Listener {
-	private final Set<Player> equipedOne = new HashSet<Player>();
-	private final Set<Player> checked = new HashSet<Player>();
+	private final Set<Player> equipedOne = new HashSet<>();
+	private final Set<Player> checked = new HashSet<>();
 
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent event) {

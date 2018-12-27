@@ -1,7 +1,7 @@
 
 package jdz.jac.notifier;
 
-import static org.bukkit.ChatColor.*;
+import static jdz.jac.utils.Messager.message;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import jdz.jac.detection.HackType;
 import jdz.jac.punisher.AutobanEvent;
 
 public class Notifier implements Listener {
-	private static final Set<Player> cooldownHackers = new HashSet<Player>();
+	private static final Set<Player> cooldownHackers = new HashSet<>();
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onHackEvent(HackEvent event) {
@@ -57,19 +57,11 @@ public class Notifier implements Listener {
 	}
 
 	public static void notify(CommandSender toNotify, Player cheater, HackType type, String extraData) {
-		toNotify.sendMessage(format(cheater.getName() + " " + type.getActionDescription() + " " + extraData));
+		message(toNotify, cheater.getName() + " " + type.getActionDescription() + " " + extraData);
 		if (toNotify instanceof Player) {
 			Player player = (Player) toNotify;
 			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1f, 2f);
 		}
-	}
-
-	private static String[] format(String message) {
-		String[] lines = message.split("\n");
-		lines[0] = RED + "[" + BOLD + GOLD + "JAC" + RESET + RED + "]" + GOLD + " " + lines[0];
-		for (int i = 1; i < lines.length; i++)
-			lines[i] = GOLD + lines[i];
-		return lines;
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -79,9 +71,9 @@ public class Notifier implements Listener {
 					|| NotifierConfig.isBroadcastAutobansAdmin() && shouldNotify(player, event.getPlayer())))
 				continue;
 			String timeString = event.isPerm() ? "permanently " : "for " + event.getDays() + " days";
-			player.sendMessage(format(event.getPlayer().getName() + " got autobanned " + timeString + "for "
-					+ event.getType().getName()));
-			player.sendMessage(format(NotifierConfig.getRandomAutobanGloatMessage()));
+			message(player,
+					event.getPlayer().getName() + " got autobanned " + timeString + "for " + event.getType().getName());
+			message(player, NotifierConfig.getRandomAutobanGloatMessage());
 		}
 	}
 }

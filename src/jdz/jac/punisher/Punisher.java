@@ -19,8 +19,8 @@ import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
 
 public class Punisher implements Listener {
-	private final Map<HackType, Map<Player, Double>> percent = new HashMap<HackType, Map<Player, Double>>();
-	private final Set<Player> autobanned = new HashSet<Player>();
+	private final Map<HackType, Map<Player, Double>> percent = new HashMap<>();
+	private final Set<Player> autobanned = new HashSet<>();
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onHackEvent(HackEvent event) {
@@ -36,7 +36,7 @@ public class Punisher implements Listener {
 		if (!percent.get(type).containsKey(player))
 			percent.get(type).put(player, 0D);
 
-		double change = (double) (type.getSeverity().ordinal()) / (double) Severity.values().length
+		double change = (double) type.getSeverity().ordinal() / (double) Severity.values().length
 				* event.getSeverityModifier() / 2D;
 
 		percent.get(type).put(player, percent.get(type).get(player) + change);
@@ -53,7 +53,7 @@ public class Punisher implements Listener {
 	private void autoban(Player player, HackType type) {
 		if (!PunisherConfig.autobanEnabled(type))
 			return;
-		
+
 		BanLevel level = PunisherConfig.getBanLevel(type);
 
 		if (level.isTemp()) {
@@ -95,6 +95,6 @@ public class Punisher implements Listener {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tempbanip " + info);
 		}
 	}
-	
-	
+
+
 }

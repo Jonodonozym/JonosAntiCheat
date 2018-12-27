@@ -16,7 +16,8 @@ public class LoggerConfig extends AutoConfig {
 	public LoggerConfig(Plugin plugin) {
 		super(plugin, "logging");
 	}
-	
+
+	@Override
 	@EventHandler
 	public void onConfigReload(ConfigReloadEvent event) {
 		super.onConfigReload(event);

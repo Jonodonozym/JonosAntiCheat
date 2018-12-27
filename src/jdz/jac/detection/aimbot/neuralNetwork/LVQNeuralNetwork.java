@@ -29,11 +29,11 @@ import lombok.Getter;
 
 /**
  * A java implementation of learning-vector-quantization neural network
- * 
+ *
  * References: T. Kohonen, "Improved Versions of Learning Vector
  * Quantization", International Joint Conference on Neural Networks (IJCNN),
  * 1990.
- * 
+ *
  * @author Nova41
  */
 public class LVQNeuralNetwork {
@@ -42,11 +42,11 @@ public class LVQNeuralNetwork {
 
 	@Getter private int inputFeatures;
 
-	private List<DataSet> inputDataSets = new ArrayList<DataSet>();
-	private List<DataSet> outputLayer = new ArrayList<DataSet>();
-	private Map<Double, DataSet> distances = new HashMap<Double, DataSet>();
-	private List<Double> inputMins = new ArrayList<Double>();
-	private List<Double> inputMaxes = new ArrayList<Double>();
+	private List<DataSet> inputDataSets = new ArrayList<>();
+	private List<DataSet> outputLayer = new ArrayList<>();
+	private Map<Double, DataSet> distances = new HashMap<>();
+	private List<Double> inputMins = new ArrayList<>();
+	private List<Double> inputMaxes = new ArrayList<>();
 
 	public LVQNeuralNetwork(double stepAlpha, double stepAlphaDelRate) {
 		this.stepAlpha = stepAlpha;
@@ -63,7 +63,7 @@ public class LVQNeuralNetwork {
 
 	public void initialize() {
 		// initialize output layers according to the number of egories and features
-		Set<String> set = new HashSet<String>();
+		Set<String> set = new HashSet<>();
 		for (DataSet entry : inputDataSets)
 			set.add(entry.category);
 
@@ -76,7 +76,7 @@ public class LVQNeuralNetwork {
 	}
 
 	public void normalize() {
-		List<Double> featureColumn = new ArrayList<Double>();
+		List<Double> featureColumn = new ArrayList<>();
 		for (int i = 0; i <= inputFeatures - 1; i++) {
 			for (DataSet entry : inputDataSets)
 				featureColumn.add(entry.data[i]);
@@ -85,10 +85,10 @@ public class LVQNeuralNetwork {
 			double max = getMax(featureColumn);
 			inputMins.add(min);
 			inputMaxes.add(max);
-			
+
 			for (DataSet entry : inputDataSets)
 				entry.data[i] = (entry.data[i] - min) / (max - min);
-			
+
 			featureColumn.clear();
 		}
 	}
@@ -156,20 +156,17 @@ public class LVQNeuralNetwork {
 
 	public void move(DataSet input, int outputIndex) {
 		DataSet output = outputLayer.get(outputIndex);
-		if (input.category.equals(output.category)) {
+		if (input.category.equals(output.category))
 			for (int i = 0; i <= inputFeatures - 1; i++)
 				outputLayer.get(outputIndex).data[i] += stepAlpha * (input.data[i] - output.data[i]);
-		}
-		else {
+		else
 			for (int i = 0; i <= inputFeatures - 1; i++)
 				outputLayer.get(outputIndex).data[i] -= stepAlpha * (input.data[i] - output.data[i]);
-		}
 	}
 
 	public void train() {
-		for (DataSet input : inputDataSets) {
+		for (DataSet input : inputDataSets)
 			move(input, getWinner(input.data));
-		}
 	}
 
 	public int trainUntil(double maxEpoch) {
@@ -188,16 +185,14 @@ public class LVQNeuralNetwork {
 
 	public void printInputLayers() {
 		System.out.println("Input layers: " + inputDataSets.size() + " category(s)");
-		for (DataSet input : inputDataSets) {
+		for (DataSet input : inputDataSets)
 			System.out.println("  " + input.category + " " + Arrays.asList(input.data));
-		}
 	}
 
 	public void printOutputLayers() {
 		System.out.println("Output layers: " + outputLayer.size() + " category(s)");
-		for (DataSet output : outputLayer) {
+		for (DataSet output : outputLayer)
 			System.out.println("  " + output.category + " " + Arrays.asList(output.data));
-		}
 	}
 
 	public int getInputLayerSize() {

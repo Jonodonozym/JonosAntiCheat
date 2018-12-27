@@ -1,6 +1,7 @@
 
 package jdz.jac.detection.aimbot.command;
 
+import static jdz.jac.utils.Messager.message;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.ChatColor.YELLOW;
 
@@ -32,13 +33,13 @@ public class AimbotTrain extends SubCommand {
 	@CommandMethod
 	public void execute(Player sender, Player target, String category, int samples) {
 		if (DataManager.isRecording(sender)) {
-			sender.sendMessage(RED + "Player already in a capturing process, please cancel it first!");
+			message(sender, RED + "Player already in a capturing process, please cancel it first!");
 			return;
 		}
 
-		sender.sendMessage(YELLOW + "Started traning " + category);
+		message(sender, YELLOW + "Started traning " + category);
 		LVQTrainer.train(target, (message) -> {
-			sender.sendMessage(message);
+			message(sender, message);
 		}, category, samples);
 	}
 }

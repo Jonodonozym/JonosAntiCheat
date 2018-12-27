@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Data
 public class HackType {
-	@Getter private static final Set<HackType> allTypes = new HashSet<HackType>();
+	@Getter private static final Set<HackType> allTypes = new HashSet<>();
 
 	private final String name;
 	private final String actionDescription;

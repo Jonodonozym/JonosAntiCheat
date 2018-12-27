@@ -12,16 +12,16 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class AutobanEvent extends Event implements Cancellable{
+public class AutobanEvent extends Event implements Cancellable {
 	private final Player player;
 	private final HackType type;
-	
+
 	private final int unbanTier;
 	private final int days;
 	private final boolean isPerm;
-	
+
 	private String extraData;
-	
+
 	public static HandlerList getHandlerList() {
 		return getHandlers(AutobanEvent.class);
 	}

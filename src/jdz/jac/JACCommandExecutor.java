@@ -15,7 +15,7 @@ import lombok.Getter;
 
 @CommandExecutorPermission("jac.admin")
 public class JACCommandExecutor extends CommandExecutor {
-	@Getter(value = PROTECTED) private final List<SubCommand> subCommands = new ArrayList<SubCommand>();
+	@Getter(value = PROTECTED) private final List<SubCommand> subCommands = new ArrayList<>();
 
 	public JACCommandExecutor(JavaPlugin plugin) {
 		super(plugin, "jac");

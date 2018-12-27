@@ -10,7 +10,7 @@ import jdz.jac.JAC;
 import lombok.Getter;
 
 public class Logger extends FileLogger {
-	private static final Map<String, Logger> loggers = new HashMap<String, Logger>();
+	private static final Map<String, Logger> loggers = new HashMap<>();
 	@Getter private static final Logger general = new Logger("Hack Log");
 
 	public static Logger get(String logName) {
@@ -29,7 +29,7 @@ public class Logger extends FileLogger {
 		setWriteToLog(LoggerConfig.isFile());
 		loggers.put(logName, this);
 	}
-	
+
 	@Override
 	public String getLogDirectory() {
 		return JAC.getInstance().getStorageFolder().getAbsolutePath();

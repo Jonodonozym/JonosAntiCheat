@@ -13,14 +13,14 @@ import lombok.Getter;
 public class NotifierConfig extends AutoConfig {
 	@Getter private static boolean opEnabled = true;
 	@Getter private static boolean consoleEnabled = true;
-	@Getter private static List<String> permissions = new ArrayList<String>();
+	@Getter private static List<String> permissions = new ArrayList<>();
 	@Getter private static int cooldownSeconds = 1;
 
 	@Getter private static boolean broadcastAutobans = true;
 	@Getter private static boolean broadcastAutobansAdmin = true;
 
-	private static List<String> autobanGloatMessages = new ArrayList<String>();
-	
+	private static List<String> autobanGloatMessages = new ArrayList<>();
+
 	public NotifierConfig(Plugin plugin) {
 		super(plugin, "notification");
 	}

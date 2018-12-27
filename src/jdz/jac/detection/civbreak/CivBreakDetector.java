@@ -24,8 +24,8 @@ public class CivBreakDetector implements Listener {
 	private static final HackType HACKTYPE_CIV_BREAK = new HackType("CivBreak", "Broke the nexus too fast",
 			Severity.NORMAL, 30);
 
-	private final Set<Player> hasClicked = new HashSet<Player>();
-	private final Set<Player> bannedPlayers = new HashSet<Player>();
+	private final Set<Player> hasClicked = new HashSet<>();
+	private final Set<Player> bannedPlayers = new HashSet<>();
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
 	public void onClickBlock(PlayerInteractEvent event) {
@@ -48,15 +48,15 @@ public class CivBreakDetector implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
 	public void onBreakNexus(BlockBreakEvent event) {
 		Player player = event.getPlayer();
-		
+
 		if (player.getGameMode().equals(GameMode.CREATIVE))
 			return;
-		
+
 		if (bannedPlayers.contains(player)) {
 			event.setCancelled(true);
 			return;
 		}
-		
+
 		else if (event.getBlock().getType() == Material.ENDER_STONE && !hasClicked.contains(player)) {
 			new HackEvent(player, HACKTYPE_CIV_BREAK, "(No Click)").call();
 			event.setCancelled(true);
@@ -64,15 +64,15 @@ public class CivBreakDetector implements Listener {
 
 		hasClicked.remove(player);
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onAutoban(AutobanEvent event){
+	public void onAutoban(AutobanEvent event) {
 		if (!event.getType().equals(HACKTYPE_CIV_BREAK))
 			return;
-		
+
 		ItemStack handItem = event.getPlayer().getItemInHand();
-		event.setExtraData("Held item: "+handItem.getType());
-		
+		event.setExtraData("Held item: " + handItem.getType());
+
 		bannedPlayers.add(event.getPlayer());
 	}
 }

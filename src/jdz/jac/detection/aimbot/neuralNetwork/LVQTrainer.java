@@ -1,8 +1,8 @@
 
 package jdz.jac.detection.aimbot.neuralNetwork;
 
-import static jdz.jac.detection.aimbot.AimbotConfig.outlierThreshold;
 import static jdz.jac.detection.aimbot.AimbotConfig.defaultTrainingSamples;
+import static jdz.jac.detection.aimbot.AimbotConfig.outlierThreshold;
 import static jdz.jac.detection.aimbot.AimbotConfig.trainingSampleSeconds;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
@@ -42,7 +42,7 @@ public class LVQTrainer {
 		private final int trainingPhases;
 
 		private int currentSample = 0;
-		private List<DataSet> samples = new ArrayList<DataSet>();
+		private List<DataSet> samples = new ArrayList<>();
 
 		@Override
 		public void run() {

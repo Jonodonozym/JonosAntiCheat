@@ -1,7 +1,8 @@
 
 package jdz.jac.detection.autoarmor;
 
-import org.bukkit.ChatColor;
+import static jdz.jac.utils.Messager.message;
+
 import org.bukkit.entity.Player;
 
 import jdz.bukkitUtils.commands.SubCommand;
@@ -22,7 +23,7 @@ public class AutoArmorCheckCommand extends SubCommand {
 
 	@CommandMethod
 	public void execute(Player sender, Player target) {
-		sender.sendMessage(ChatColor.GOLD + "[JAC] Checking " + target.getName() + " for auto-armor...");
+		message(sender, "Checking " + target.getName() + " for auto-armor...");
 		AutoArmorVerifier.verify(sender, target);
 	}
 

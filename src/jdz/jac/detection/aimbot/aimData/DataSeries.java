@@ -8,8 +8,8 @@ import java.util.List;
 import lombok.Getter;
 
 public class DataSeries {
-	@Getter private List<Float> angleSeries = new ArrayList<Float>();
-	@Getter private List<Float> rangeSeries = new ArrayList<Float>();
+	@Getter private List<Float> angleSeries = new ArrayList<>();
+	@Getter private List<Float> rangeSeries = new ArrayList<>();
 	@Getter private int hits = 0;
 
 	public void addMiss(float angle) {
@@ -18,7 +18,9 @@ public class DataSeries {
 
 	public void addHit(float angle, float range) {
 		angleSeries.add(angle);
-		rangeSeries.add(range);
+		if (range > 10)
+			range = 10;
+		rangeSeries.add(range / 10.f);
 		hits++;
 	}
 
@@ -56,7 +58,7 @@ public class DataSeries {
 	}
 
 	private double getDeltaMean() {
-		return (getDeltaSum() / getDeltaLength());
+		return getDeltaSum() / getDeltaLength();
 	}
 
 	private double getDeltaSum() {

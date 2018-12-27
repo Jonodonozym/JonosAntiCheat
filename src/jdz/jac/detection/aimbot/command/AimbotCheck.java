@@ -1,7 +1,10 @@
 
 package jdz.jac.detection.aimbot.command;
 
-import static org.bukkit.ChatColor.*;
+import static jdz.jac.utils.Messager.message;
+import static org.bukkit.ChatColor.GREEN;
+import static org.bukkit.ChatColor.RED;
+import static org.bukkit.ChatColor.YELLOW;
 
 import org.bukkit.entity.Player;
 
@@ -23,20 +26,20 @@ public class AimbotCheck extends SubCommand {
 
 	@CommandMethod
 	public void execute(Player sender, Player target, int timeLength) {
-		sender.sendMessage(YELLOW + "Checking " + target.getName() + " for " + timeLength + " seconds.");
+		message(sender, YELLOW + "Checking " + target.getName() + " for " + timeLength + " seconds.");
 		try {
 			AimbotClassifier.classify(target, (result) -> {
-				sender.sendMessage(GOLD + "** Analysis Report **");
-				sender.sendMessage(GREEN + "  Best matched: " + YELLOW + result.getBestMatched());
-				sender.sendMessage(GREEN + "  Euclidean distance: " + YELLOW + result.getDistance());
+				message(sender, "** Analysis Report **");
+				message(sender, GREEN + "  Best matched: " + YELLOW + result.getBestMatched());
+				message(sender, GREEN + "  Euclidean distance: " + YELLOW + result.getDistance());
 			}, timeLength);
 		}
 		catch (InsufficientDataException e1) {
-			sender.sendMessage(RED + "Insufficient data for an accurate classification");
-			sender.sendMessage(RED + "Increase test length or ensure target remains in combat while checking");
+			message(sender, RED + "Insufficient data for an accurate classification");
+			message(sender, RED + "Increase test length or ensure target remains in combat while checking");
 		}
 		catch (IllegalStateException e2) {
-			sender.sendMessage(RED + "Someone else is already checking them, please wait!");
+			message(sender, RED + "Someone else is already checking them, please wait!");
 		}
 	}
 

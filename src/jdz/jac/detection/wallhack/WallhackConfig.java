@@ -11,8 +11,8 @@ import jdz.bukkitUtils.config.AutoConfig;
 import lombok.Getter;
 
 public class WallhackConfig extends AutoConfig {
-	@Getter private static final Set<Material> canClickThrough = new HashSet<Material>();
-	@Getter private static final Set<Material> containersToIgnore = new HashSet<Material>();
+	@Getter private static final Set<Material> canClickThrough = new HashSet<>();
+	@Getter private static final Set<Material> containersToIgnore = new HashSet<>();
 
 	public WallhackConfig(Plugin plugin) {
 		super(plugin, "wallhack");

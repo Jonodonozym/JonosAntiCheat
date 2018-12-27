@@ -16,11 +16,11 @@ import jdz.jac.detection.HackType;
 import lombok.Getter;
 
 public class PunisherConfig implements Listener {
-	private static final Map<HackType, BanLevel> hackTypeToBanLevel = new HashMap<HackType, BanLevel>();
-	private static final Set<HackType> autobanEnabled = new HashSet<HackType>();
-	private static final Map<BanLevel, Integer> tempbanLevelDays = new HashMap<BanLevel, Integer>();
-	private static final Map<BanLevel, Integer> unbanTier = new HashMap<BanLevel, Integer>();
-	private static final Map<BanLevel, Integer> bansTilPerm = new HashMap<BanLevel, Integer>();
+	private static final Map<HackType, BanLevel> hackTypeToBanLevel = new HashMap<>();
+	private static final Set<HackType> autobanEnabled = new HashSet<>();
+	private static final Map<BanLevel, Integer> tempbanLevelDays = new HashMap<>();
+	private static final Map<BanLevel, Integer> unbanTier = new HashMap<>();
+	private static final Map<BanLevel, Integer> bansTilPerm = new HashMap<>();
 
 	@Getter private static boolean runCommands = false;
 	@Getter private static boolean kickInstead = false;

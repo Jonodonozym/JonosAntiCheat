@@ -1,8 +1,9 @@
 
 package jdz.jac.detection.autoarmor;
 
+import static jdz.jac.utils.Messager.message;
+
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,8 +32,7 @@ public class AutoArmorVerifier {
 
 		if (nulls > 0) {
 			if (checker != null)
-				checker.sendMessage(ChatColor.GOLD
-						+ "[JAC] Player isn't wearing full gear. Check again when they are fullly armored");
+				message(checker, "Player isn't wearing full gear. Check again when they are fullly armored");
 			return;
 		}
 
@@ -41,7 +41,7 @@ public class AutoArmorVerifier {
 		player.getInventory().setArmorContents(null);
 
 		int ping = PingFetcher.getPing(player);
-		int ticks = AutoArmorConfig.getAutoequipTicks() + (ping / 25);
+		int ticks = AutoArmorConfig.getAutoequipTicks() + ping / 25;
 
 		Bukkit.getScheduler().runTaskLater(JAC.getInstance(), () -> {
 			int equipedPieces = 0;
@@ -56,18 +56,17 @@ public class AutoArmorVerifier {
 
 			if (equipedPieces == 4) {
 				if (checker != null)
-					checker.sendMessage(ChatColor.GOLD + "[JAC] Player auto-equiped check passed [CheckTime:"
-							+ ticks * 50 + "ms][Ping:" + ping + "ms][items:" + equipedPieces + "]");
+					message(checker, "Player auto-equiped check passed [CheckTime:" + ticks * 50 + "ms][Ping:" + ping
+							+ "ms][items:" + equipedPieces + "]");
 				else {
 					HackEvent event = new HackEvent(player, HACKTYPE_AUTO_ARMOR,
 							"[CheckTime:" + ticks * 50 + "ms][Ping:" + ping + "ms][items:" + equipedPieces + "]");
 					event.call();
 				}
 			}
-			else if (checker != null) {
-				checker.sendMessage(ChatColor.GOLD + "[JAC] Player auto-equiped check failed [CheckTime:" + ticks * 50
-						+ "ms][Ping:" + ping + "ms][items:" + equipedPieces + "]");
-			}
+			else if (checker != null)
+				message(checker, "Player auto-equiped check failed [CheckTime:" + ticks * 50 + "ms][Ping:" + ping
+						+ "ms][items:" + equipedPieces + "]");
 		}, ticks);
 	}
 }
