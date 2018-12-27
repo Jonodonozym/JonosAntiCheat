@@ -1,7 +1,7 @@
 
 package jdz.jac.detection.aimbot.aimData;
 
-import static jdz.jac.utils.Messager.message;
+import static jdz.jac.utils.Messager.plainMessage;
 import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.RESET;
 import static org.bukkit.ChatColor.YELLOW;
@@ -83,24 +83,24 @@ public class DataIO {
 		}
 	}
 
-	public static void sendInfoToPlayer(Player p) {
+	public static void sendInfoToPlayer(Player player) {
 		try {
 			int categoryNum = getStoredCategoryNum();
-			message(p, AQUA + "  Stored " + categoryNum + (categoryNum != 1 ? " categories" : " category"));
+			plainMessage(player, AQUA + "  Stored " + categoryNum + (categoryNum != 1 ? " categories" : " category"));
 			File cat_folder = getFile("categories");
 			for (File file : cat_folder.listFiles())
-				sendInfoToPlayer(YamlConfiguration.loadConfiguration(file), p);
+				sendInfoToPlayer(YamlConfiguration.loadConfiguration(file), player);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			message(p, ChatColor.RED + "Something went wrong in fetching category data");
+			plainMessage(player, ChatColor.RED + "Something went wrong in fetching category data");
 		}
 	}
 
 	private static void sendInfoToPlayer(FileConfiguration config, Player player) {
 		List<DataSet> samples = new ArrayList<>();
 		importSamples(config, samples);
-		message(player, "   Category " + YELLOW + config.getString("category") + RESET + " samples: " + YELLOW
+		plainMessage(player, "   Category " + YELLOW + config.getString("category") + RESET + " samples: " + YELLOW
 				+ samples.size());
 	}
 

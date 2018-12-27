@@ -2,7 +2,7 @@
 package jdz.jac.detection.aimbot;
 
 import static jdz.jac.detection.aimbot.AimbotConfig.minCheckClicks;
-import static jdz.jac.utils.Messager.message;
+import static jdz.jac.utils.Messager.plainMessage;
 import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.YELLOW;
 
@@ -41,6 +41,10 @@ public class AimbotClassifier {
 	}
 
 	public static void classify(Player target, Callback callback, int sampleSeconds) {
+		classify(target, callback, () -> {}, sampleSeconds);
+	}
+
+	public static void classify(Player target, Callback callback, Runnable onInsufficientData, int sampleSeconds) {
 		if (DataManager.isRecording(target))
 			throw new IllegalStateException("Already checking the target!");
 
@@ -48,16 +52,14 @@ public class AimbotClassifier {
 		Bukkit.getScheduler().runTaskLaterAsynchronously(JAC.getInstance(), () -> {
 			DataSeries data = DataManager.stopRecording(target);
 
-			if (data.getLength() < minCheckClicks)
-				throw new InsufficientDataException();
+			if (data.getLength() < minCheckClicks) {
+				onInsufficientData.run();
+				return;
+			}
 
 			PredictResult result = classify(data);
 			callback.onClassify(result);
 		}, 20L * sampleSeconds);
-	}
-
-	public static class InsufficientDataException extends RuntimeException {
-		private static final long serialVersionUID = -5650900306799452375L;
 	}
 
 	public static PredictResult classify(DataSeries data) {
@@ -82,9 +84,9 @@ public class AimbotClassifier {
 	}
 
 	public static void sendInfoToPlayer(Player p) {
-		message(p, AQUA + "  Neural network: ");
-		message(p, "   Input layer size: " + YELLOW + lvq.getInputLayerSize());
-		message(p, "   Output layer size: " + YELLOW + lvq.getOutputLayerSize());
+		plainMessage(p, AQUA + "  Neural network: ");
+		plainMessage(p, "   Input layer size: " + YELLOW + lvq.getInputLayerSize());
+		plainMessage(p, "   Output layer size: " + YELLOW + lvq.getOutputLayerSize());
 		lvq.printOutputLayers();
 		DataIO.sendInfoToPlayer(p);
 	}

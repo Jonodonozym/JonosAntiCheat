@@ -1,7 +1,9 @@
 
 package jdz.jac.detection.aimbot.command;
 
+import static jdz.jac.utils.Messager.error;
 import static jdz.jac.utils.Messager.message;
+import static jdz.jac.utils.Messager.plainMessage;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.ChatColor.YELLOW;
@@ -13,7 +15,6 @@ import jdz.bukkitUtils.commands.annotations.CommandLabel;
 import jdz.bukkitUtils.commands.annotations.CommandMethod;
 import jdz.bukkitUtils.commands.annotations.CommandUsage;
 import jdz.jac.detection.aimbot.AimbotClassifier;
-import jdz.jac.detection.aimbot.AimbotClassifier.InsufficientDataException;
 
 @CommandLabel("check")
 @CommandUsage("{target} [seconds]")
@@ -29,17 +30,16 @@ public class AimbotCheck extends SubCommand {
 		message(sender, YELLOW + "Checking " + target.getName() + " for " + timeLength + " seconds.");
 		try {
 			AimbotClassifier.classify(target, (result) -> {
-				message(sender, "** Analysis Report **");
-				message(sender, GREEN + "  Best matched: " + YELLOW + result.getBestMatched());
-				message(sender, GREEN + "  Euclidean distance: " + YELLOW + result.getDistance());
+				plainMessage(sender, "** Analysis Report **");
+				plainMessage(sender, GREEN + "  Best matched: " + YELLOW + result.getBestMatched());
+				plainMessage(sender, GREEN + "  Euclidean distance: " + YELLOW + result.getDistance());
+			}, () -> {
+				error(sender, RED + "Insufficient data for an accurate classification");
+				error(sender, RED + "Increase test length or ensure target remains in combat while checking");
 			}, timeLength);
 		}
-		catch (InsufficientDataException e1) {
-			message(sender, RED + "Insufficient data for an accurate classification");
-			message(sender, RED + "Increase test length or ensure target remains in combat while checking");
-		}
 		catch (IllegalStateException e2) {
-			message(sender, RED + "Someone else is already checking them, please wait!");
+			error(sender, RED + "Someone else is already checking them, please wait!");
 		}
 	}
 
