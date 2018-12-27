@@ -15,7 +15,7 @@ import lombok.Getter;
 @CommandLabel("aim")
 public class AimbotCommandExecutor extends ParentCommand {
 	@Getter protected List<SubCommand> subCommands = Arrays.asList(new AimbotCheck(), new AimbotInfo(),
-			new AimbotTrain(), new AimbotTestMonster());
+			new AimbotTrain(), new AimbotTestMonster(), new AimbotStressTest());
 
 	public AimbotCommandExecutor(CommandExecutor commandExecutor) {
 		super(commandExecutor);

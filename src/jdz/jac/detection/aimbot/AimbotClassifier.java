@@ -39,19 +39,28 @@ public class AimbotClassifier {
 		}
 	}
 
-	public static void classify(Player target, Callback callback, Runnable onInsufficientData, int sampleSeconds) {
-		DataManager.addPlayer(target);
-		Bukkit.getScheduler().runTaskLater(JAC.getInstance(), () -> {
-			DataSeries data = DataManager.removePlayer(target);
+	public static void classify(Player target, Callback callback, int sampleSeconds) {
+		if (DataManager.isRecording(target))
+			throw new IllegalStateException("Already checking the target!");
 
-			if (data.getLength() < minCheckClicks) {
-				onInsufficientData.run();
-				return;
-			}
+		DataManager.startRecording(target);
+		Bukkit.getScheduler().runTaskLaterAsynchronously(JAC.getInstance(), () -> {
+			DataSeries data = DataManager.stopRecording(target);
 
-			PredictResult result = lvq.predict(data.getAllDump());
+			if (data.getLength() < minCheckClicks)
+				throw new InsufficientDataException();
+
+			PredictResult result = classify(data);
 			callback.onClassify(result);
 		}, 20L * sampleSeconds);
+	}
+
+	public static class InsufficientDataException extends RuntimeException {
+		private static final long serialVersionUID = -5650900306799452375L;
+	}
+
+	public static PredictResult classify(DataSeries data) {
+		return lvq.predict(data.getAllDump());
 	}
 
 	public static interface Callback {

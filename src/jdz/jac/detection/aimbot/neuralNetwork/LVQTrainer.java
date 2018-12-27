@@ -62,7 +62,7 @@ public class LVQTrainer {
 
 			if (currentSample >= trainingPhases) {
 				logger.log(GREEN + "Sample process finished");
-				DataManager.removePlayer(target);
+				DataManager.stopRecording(target);
 				save();
 				rebuildNetwork();
 				cancel();
@@ -72,7 +72,7 @@ public class LVQTrainer {
 			currentSample++;
 			logger.log(
 					YELLOW + "Sampling features for " + category + ", sample " + currentSample + "/" + trainingPhases);
-			DataManager.addPlayer(target);
+			DataManager.startRecording(target);
 		}
 
 		private boolean isOutlier(Double[] sampleData) {

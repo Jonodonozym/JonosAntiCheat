@@ -10,11 +10,11 @@ import org.bukkit.OfflinePlayer;
 public class DataManager {
 	private static Map<UUID, DataSeries> playerData = new HashMap<>();
 
-	public static void addPlayer(OfflinePlayer player) {
+	public static void startRecording(OfflinePlayer player) {
 		playerData.put(player.getUniqueId(), new DataSeries());
 	}
 
-	public static DataSeries removePlayer(OfflinePlayer player) {
+	public static DataSeries stopRecording(OfflinePlayer player) {
 		return playerData.remove(player.getUniqueId());
 	}
 

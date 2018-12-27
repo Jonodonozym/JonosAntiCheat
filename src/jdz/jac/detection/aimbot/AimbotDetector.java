@@ -17,6 +17,8 @@ import jdz.bukkitUtils.misc.CombatTimer;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
+import jdz.jac.detection.aimbot.AimbotClassifier.InsufficientDataException;
+import jdz.jac.detection.aimbot.aimData.DataManager;
 import jdz.jac.detection.aimbot.aimData.DataRecorder;
 
 public class AimbotDetector implements Listener {
@@ -43,18 +45,23 @@ public class AimbotDetector implements Listener {
 
 		lastChecks.put(event.getPlayer(), System.currentTimeMillis());
 
-		AimbotClassifier.classify(event.getPlayer(), (result) -> {
-			if (allowedClasses.contains(result.getBestMatched()))
-				return;
+		try {
+			AimbotClassifier.classify(event.getPlayer(), (result) -> {
+				if (allowedClasses.contains(result.getBestMatched()))
+					return;
 
-			new HackEvent(event.getPlayer(), AIMBOT_HACKTYPE,
-					"\n\t type: " + result.getBestMatched() + "\n\t dist: " + result.getDistance()).call();
+				new HackEvent(event.getPlayer(), AIMBOT_HACKTYPE,
+						"\n\t type: " + result.getBestMatched() + "\n\t dist: " + result.getDistance()).call();
 
-			lastChecks.remove(event.getPlayer());
-		}, () -> {}, 15);
+				lastChecks.remove(event.getPlayer());
+			}, 15);
+		}
+		catch (IllegalStateException | InsufficientDataException e) {}
 	}
 
 	private boolean shouldCheck(Player player) {
+		if (DataManager.isRecording(player))
+			return false;
 		if (!lastChecks.containsKey(player))
 			return true;
 		return (System.currentTimeMillis() - lastChecks.get(player)) * 1000 < minRecheckIntervalSeconds;
