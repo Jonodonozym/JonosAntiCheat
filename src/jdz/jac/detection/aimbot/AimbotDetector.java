@@ -1,7 +1,7 @@
 
 package jdz.jac.detection.aimbot;
 
-import static jdz.jac.detection.aimbot.AimbotConfig.allowedClasses;
+import static jdz.jac.detection.aimbot.AimbotConfig.isClassAllowed;
 import static jdz.jac.detection.aimbot.AimbotConfig.minRecheckIntervalSeconds;
 
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class AimbotDetector implements Listener {
 
 		try {
 			AimbotClassifier.classify(event.getPlayer(), (result) -> {
-				if (allowedClasses.contains(result.getBestMatched()))
+				if (isClassAllowed(result.getBestMatched()))
 					return;
 
 				new HackEvent(event.getPlayer(), AIMBOT_HACKTYPE,

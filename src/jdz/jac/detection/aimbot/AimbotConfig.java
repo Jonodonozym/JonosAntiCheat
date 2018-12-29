@@ -15,9 +15,13 @@ public class AimbotConfig extends AutoConfig {
 	public static final double outlierThreshold = 0.3;
 	public static final int minCheckClicks = 8;
 	public static final double minRecheckIntervalSeconds = 120;
-	public static final Set<String> allowedClasses = new HashSet<>(Arrays.asList("vanilla.legit", "legit"));
+	private static final Set<String> allowedClasses = new HashSet<>(Arrays.asList("vanilla.legit"));
 
 	public AimbotConfig(Plugin plugin) {
 		super(plugin, "aimbot");
+	}
+
+	public static boolean isClassAllowed(String classification) {
+		return classification.toLowerCase().startsWith("legit") || allowedClasses.contains(classification);
 	}
 }

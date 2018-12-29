@@ -19,6 +19,6 @@ public class TypeEnabledConfig implements Listener {
 	}
 
 	public static boolean isEnabled(HackType type) {
-		return config.getBoolean(type.getName() + ".enabled", true);
+		return config.getBoolean(type.getName().toLowerCase() + ".enabled", true);
 	}
 }
