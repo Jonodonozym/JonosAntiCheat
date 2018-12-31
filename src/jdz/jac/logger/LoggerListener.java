@@ -11,8 +11,8 @@ import jdz.jac.punisher.AutobanEvent;
 public class LoggerListener implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onHackEvent(HackEvent event) {
-		Logger.getGeneral().log(event.getPlayer().getName() + " " + event.getType().getActionDescription() + " "
-				+ event.getExtraData());
+		Logger.getGeneral()
+				.log(event.getActionDescription() + "\n\t" + event.getExtraData() + "\n\t" + event.getLoggerData());
 		if (event.isCancelled())
 			Logger.getGeneral().log("The hack event was cancelled by a plugin");
 	}

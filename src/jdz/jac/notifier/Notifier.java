@@ -3,6 +3,7 @@ package jdz.jac.notifier;
 
 import static jdz.jac.utils.Messager.message;
 
+import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,6 @@ import org.bukkit.event.EventPriority;
 import jdz.bukkitUtils.events.Listener;
 import jdz.jac.JAC;
 import jdz.jac.detection.HackEvent;
-import jdz.jac.detection.HackType;
 import jdz.jac.punisher.AutobanEvent;
 
 public class Notifier implements Listener {
@@ -25,7 +25,6 @@ public class Notifier implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onHackEvent(HackEvent event) {
 		Player player = event.getPlayer();
-		HackType type = event.getType();
 
 		if (cooldownHackers.contains(player))
 			return;
@@ -34,15 +33,15 @@ public class Notifier implements Listener {
 			cooldownHackers.remove(player);
 		}, NotifierConfig.getCooldownSeconds() * 20);
 
-		broadcastNotification(player, type, event.getExtraData(), event.getExtraData());
+		broadcastNotification(player, event);
 	}
 
-	public static void broadcastNotification(Player cheater, HackType type, String extraData, String loggerData) {
+	public static void broadcastNotification(Player cheater, HackEvent event) {
 		for (Player notifier : Bukkit.getOnlinePlayers())
 			if (shouldNotify(notifier, cheater))
-				notify(notifier, cheater, type, extraData);
+				notify(notifier, cheater, event);
 		if (NotifierConfig.isConsoleEnabled())
-			notify(Bukkit.getConsoleSender(), cheater, type, loggerData);
+			notify(Bukkit.getConsoleSender(), cheater, event);
 	}
 
 	public static boolean shouldNotify(Player player, Player cheater) {
@@ -56,11 +55,11 @@ public class Notifier implements Listener {
 		return false;
 	}
 
-	public static void notify(CommandSender toNotify, Player cheater, HackType type, String extraData) {
-		message(toNotify, cheater.getName() + " " + type.getActionDescription() + " " + extraData);
+	public static void notify(CommandSender toNotify, Player cheater, HackEvent event) {
+		message(toNotify, event.getActionDescription() + event.getExtraData());
 		if (toNotify instanceof Player) {
 			Player player = (Player) toNotify;
-			player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1f, 2f);
+			player.playSound(player.getLocation(), notifySound, 1f, 2f);
 		}
 	}
 
@@ -75,5 +74,22 @@ public class Notifier implements Listener {
 					event.getPlayer().getName() + " got autobanned " + timeString + "for " + event.getType().getName());
 			message(player, NotifierConfig.getRandomAutobanGloatMessage());
 		}
+	}
+
+	private static final Sound notifySound;
+	static {
+		Sound s = null;
+		for (Field field : Sound.class.getDeclaredFields()) {
+			if (field.getName().endsWith("ORB_PICKUP")) {
+				try {
+					s = (Sound) field.get(null);
+				}
+				catch (ReflectiveOperationException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+		notifySound = s;
 	}
 }

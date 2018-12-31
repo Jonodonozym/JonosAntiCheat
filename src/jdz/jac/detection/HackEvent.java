@@ -18,11 +18,22 @@ public class HackEvent extends Event implements Cancellable {
 	@Getter private final Player player;
 	@Getter private final HackType type;
 	@Getter private final String extraData;
+	@Getter private final String loggerData;
 	@Wither @Getter private double persistanceTicksModifier = 1;
 	@Wither @Getter private double severityModifier = 1;
 
 	public HackEvent(Player player, HackType type) {
-		this(player, type, "");
+		this(player, type, "", "");
+	}
+
+	public HackEvent(Player player, HackType type, String loggerData, String... extraData) {
+		this(player, type, String.join("\n", extraData), loggerData);
+	}
+
+	public String getActionDescription() {
+		if (type.getActionDescription().contains("%player%"))
+			return type.getActionDescription().replaceAll("%player%", player.getName());
+		return player.getName() + " " + type.getActionDescription();
 	}
 
 	@Override
