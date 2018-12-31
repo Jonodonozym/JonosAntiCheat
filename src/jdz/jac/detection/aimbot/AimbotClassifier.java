@@ -2,7 +2,7 @@
 package jdz.jac.detection.aimbot;
 
 import static jdz.jac.detection.aimbot.AimbotConfig.minCheckClicks;
-import static jdz.jac.utils.Messager.plainMessage;
+import static jdz.jac.notifier.Messager.plainMessage;
 import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.YELLOW;
 
@@ -57,8 +57,9 @@ public class AimbotClassifier {
 				return;
 			}
 
-			PredictResult result = classify(data);
-			callback.onClassify(result);
+			Double[] dataDump = data.getAllDump();
+			PredictResult result = lvq.predict(dataDump);
+			callback.onClassify(dataDump, result);
 		}, 20L * sampleSeconds);
 	}
 
@@ -67,7 +68,7 @@ public class AimbotClassifier {
 	}
 
 	public static interface Callback {
-		public void onClassify(PredictResult result);
+		public void onClassify(Double[] data, PredictResult result);
 	}
 
 	public static int rebuild() throws Exception {

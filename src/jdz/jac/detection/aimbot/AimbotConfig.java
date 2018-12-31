@@ -12,8 +12,8 @@ import jdz.bukkitUtils.config.AutoConfig;
 public class AimbotConfig extends AutoConfig {
 	public static final int defaultTrainingSamples = 7;
 	public static final int trainingSampleSeconds = 6;
-	public static final double outlierThreshold = 0.3;
-	public static final int minCheckClicks = 8;
+	public static final double outlierThreshold = 0.5;
+	public static final int minCheckClicks = 15;
 	public static final double minRecheckIntervalSeconds = 120;
 	private static final Set<String> allowedClasses = new HashSet<>(Arrays.asList("vanilla.legit"));
 

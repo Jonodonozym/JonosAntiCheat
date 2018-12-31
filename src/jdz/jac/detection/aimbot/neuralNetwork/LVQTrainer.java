@@ -4,6 +4,7 @@ package jdz.jac.detection.aimbot.neuralNetwork;
 import static jdz.jac.detection.aimbot.AimbotConfig.defaultTrainingSamples;
 import static jdz.jac.detection.aimbot.AimbotConfig.outlierThreshold;
 import static jdz.jac.detection.aimbot.AimbotConfig.trainingSampleSeconds;
+import static jdz.jac.detection.aimbot.AimbotConfig.minCheckClicks;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.ChatColor.YELLOW;
@@ -18,6 +19,7 @@ import jdz.jac.JAC;
 import jdz.jac.detection.aimbot.AimbotClassifier;
 import jdz.jac.detection.aimbot.aimData.DataIO;
 import jdz.jac.detection.aimbot.aimData.DataManager;
+import jdz.jac.detection.aimbot.aimData.DataSeries;
 import lombok.RequiredArgsConstructor;
 
 public class LVQTrainer {
@@ -46,19 +48,28 @@ public class LVQTrainer {
 
 		@Override
 		public void run() {
-			if (currentSample > 0) {
-				Double[] sampleData = DataManager.getDataSeries(target).getAllDump();
-
-				if (isOutlier(sampleData)) {
-					logger.log(YELLOW + "Outlier detected at sample " + currentSample + ". Resampling...");
-					DataManager.clearData(target);
-					return;
-				}
-
-				logger.log(GREEN + "Finished sampling " + currentSample);
-				samples.add(new DataSet(category, sampleData));
-				DataManager.clearData(target);
+			if (currentSample == 0) {
+				logger.log(GREEN + "Started sample 1/" + trainingPhases);
+				DataManager.startRecording(target);
+				return;
 			}
+
+			DataSeries series = DataManager.getDataSeries(target);
+			if (series.getLength() <= minCheckClicks) {
+				logger.log(YELLOW + "Insufficient data for sample, keep attacking!");
+				return;
+			}
+
+			Double[] sampleData = series.getAllDump();
+
+			if (isOutlier(sampleData)) {
+				logger.log(YELLOW + "Outlier detected, resampling...");
+				DataManager.clearData(target);
+				return;
+			}
+
+			samples.add(new DataSet(category, sampleData));
+			DataManager.clearData(target);
 
 			if (currentSample >= trainingPhases) {
 				logger.log(GREEN + "Sample process finished");
@@ -69,9 +80,7 @@ public class LVQTrainer {
 				return;
 			}
 
-			currentSample++;
-			logger.log(
-					YELLOW + "Sampling features for " + category + ", sample " + currentSample + "/" + trainingPhases);
+			logger.log(GREEN + "Finished sampling, started sample " + ++currentSample + "/" + trainingPhases);
 			DataManager.startRecording(target);
 		}
 

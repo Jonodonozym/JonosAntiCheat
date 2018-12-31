@@ -55,10 +55,6 @@ public class DataRecorder implements Listener {
 		DataSeries dataSeries = DataManager.getDataSeries(player);
 		float angle = getLookAngle(player, target);
 
-		// removing outliers
-		if (Math.abs(angle) > Math.PI / 3)
-			return;
-
 		if (!hit)
 			dataSeries.addMiss(angle);
 		else
