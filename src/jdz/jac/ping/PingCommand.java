@@ -1,7 +1,7 @@
 
 package jdz.jac.ping;
 
-import static jdz.jac.utils.Messager.message;
+import static jdz.jac.notifier.Messager.message;
 import static org.bukkit.ChatColor.LIGHT_PURPLE;
 import static org.bukkit.ChatColor.WHITE;
 

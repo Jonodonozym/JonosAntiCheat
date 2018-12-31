@@ -1,7 +1,7 @@
 
 package jdz.jac.detection.aimbot.command;
 
-import static jdz.jac.utils.Messager.message;
+import static jdz.jac.notifier.Messager.message;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

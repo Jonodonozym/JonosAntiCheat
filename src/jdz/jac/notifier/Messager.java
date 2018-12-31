@@ -1,5 +1,5 @@
 
-package jdz.jac.utils;
+package jdz.jac.notifier;
 
 import static org.bukkit.ChatColor.*;
 
@@ -20,9 +20,9 @@ public class Messager {
 
 	private static String[] format(String message) {
 		String[] lines = message.split("\n");
-		lines[0] = RED + "" + BOLD + "[" + GOLD + "JAC" + RED + "]" + GOLD + RESET + " " + lines[0];
+		lines[0] = RED + "" + BOLD + "[" + GOLD + "JAC" + RED + "]" + RESET + GOLD + " " + lines[0];
 		for (int i = 1; i < lines.length; i++)
-			lines[i] = lines[i];
+			lines[i] = GOLD + lines[i];
 		return lines;
 	}
 }

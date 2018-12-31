@@ -1,7 +1,7 @@
 
 package jdz.jac.notifier;
 
-import static jdz.jac.utils.Messager.message;
+import static jdz.jac.notifier.Messager.message;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;

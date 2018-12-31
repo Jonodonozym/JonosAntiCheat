@@ -1,7 +1,7 @@
 
 package jdz.jac.detection.aimbot.command;
 
-import static jdz.jac.utils.Messager.message;
+import static jdz.jac.notifier.Messager.message;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.ChatColor.YELLOW;
 

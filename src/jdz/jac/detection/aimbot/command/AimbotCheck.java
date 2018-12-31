@@ -1,9 +1,9 @@
 
 package jdz.jac.detection.aimbot.command;
 
-import static jdz.jac.utils.Messager.error;
-import static jdz.jac.utils.Messager.message;
-import static jdz.jac.utils.Messager.plainMessage;
+import static jdz.jac.notifier.Messager.error;
+import static jdz.jac.notifier.Messager.message;
+import static jdz.jac.notifier.Messager.plainMessage;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.ChatColor.YELLOW;
@@ -29,7 +29,7 @@ public class AimbotCheck extends SubCommand {
 	public void execute(Player sender, Player target, int timeLength) {
 		message(sender, YELLOW + "Checking " + target.getName() + " for " + timeLength + " seconds.");
 		try {
-			AimbotClassifier.classify(target, (result) -> {
+			AimbotClassifier.classify(target, (data, result) -> {
 				plainMessage(sender, "** Analysis Report **");
 				plainMessage(sender, GREEN + "  Best matched: " + YELLOW + result.getBestMatched());
 				plainMessage(sender, GREEN + "  Euclidean distance: " + YELLOW + result.getDistance());
