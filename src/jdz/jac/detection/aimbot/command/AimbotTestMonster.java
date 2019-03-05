@@ -2,7 +2,7 @@
 package jdz.jac.detection.aimbot.command;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -29,9 +29,9 @@ public class AimbotTestMonster extends SubCommand {
 
 	@CommandMethod
 	public void execute(Player player, int seconds) {
-		Entity entity = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.ZOMBIE);
-		((LivingEntity) entity).setMaxHealth(2000);
-		((LivingEntity) entity).setHealth(2000);
+		LivingEntity entity = (LivingEntity) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.ZOMBIE);
+		entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(2000);
+		entity.setHealth(2000);
 		Bukkit.getScheduler().runTaskLater(JAC.getInstance(), () -> {
 			entity.remove();
 		}, 20 * seconds);
