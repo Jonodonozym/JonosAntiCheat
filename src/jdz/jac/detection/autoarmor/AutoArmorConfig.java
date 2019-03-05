@@ -7,11 +7,10 @@ import jdz.bukkitUtils.config.AutoConfig;
 import lombok.Getter;
 
 public class AutoArmorConfig extends AutoConfig {
-	@Getter private static boolean enabled = true;
 	@Getter private static int autoequipTicks = 5;
 	@Getter private static boolean addPingToTicks = true;
 
 	public AutoArmorConfig(Plugin plugin) {
-		super(plugin, "autoarmor");
+		super(plugin, "AutoArmor");
 	}
 }

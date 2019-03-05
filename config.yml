@@ -16,8 +16,7 @@ notification:
     - "Who needs admins when you've got JAC?"
     - "*Cracks knuckles*"
     - "And the crowd goes wild"
-    - "This autoban was brought to you by JAC™. We also make delicious ice cream."
-    - "Bets on whether or not this was an alt?"
+    - "This autoban was brought to you by JAC. We also make delicious ice cream."
     
 banning:
   kickInstead: false
@@ -49,7 +48,7 @@ AutoArmor:
   autoequipTicks: 8
   addPingToTicks: true
 
-Wallhacks:
+WallHack:
   enabled: true
   level: MEDIUM
   autoban: false

@@ -20,7 +20,7 @@ public class TypeEnabledConfig implements Listener {
 	}
 
 	private static String configKey(HackType type) {
-		return type.getName().toLowerCase() + ".enabled";
+		return type.getName() + ".enabled";
 	}
 
 	@EventHandler

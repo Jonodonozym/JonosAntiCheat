@@ -18,6 +18,7 @@ import jdz.bukkitUtils.events.Listener;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
+import jdz.jac.detection.TypeEnabledConfig;
 import jdz.jac.punisher.AutobanEvent;
 
 public class CivBreakDetector implements Listener {
@@ -32,7 +33,7 @@ public class CivBreakDetector implements Listener {
 		if (event.getAction() != Action.LEFT_CLICK_BLOCK)
 			return;
 
-		if (!CivBreakConfig.isEnabled())
+		if (!TypeEnabledConfig.isEnabled(HACKTYPE_CIV_BREAK))
 			return;
 
 		Player player = event.getPlayer();
