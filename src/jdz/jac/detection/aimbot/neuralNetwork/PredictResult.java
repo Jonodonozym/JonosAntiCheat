@@ -10,4 +10,8 @@ import lombok.Getter;
 public class PredictResult {
 	@Getter String bestMatched;
 	@Getter double distance;
+
+	public double getConfidence() {
+		return distance;
+	}
 }

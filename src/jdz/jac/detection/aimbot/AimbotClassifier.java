@@ -79,9 +79,12 @@ public class AimbotClassifier {
 		if (lvq.getInputFeatures() == 0)
 			return -1;
 
-		lvq.normalize();
 		lvq.initialize();
-		return lvq.trainUntil(0.00000000001);
+		lvq.normalize();
+		int r = lvq.trainUntil(0.00000000001);
+
+		lvq.normalize();
+		return r;
 	}
 
 	public static void sendInfoToPlayer(Player p) {

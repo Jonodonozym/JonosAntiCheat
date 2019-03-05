@@ -51,6 +51,7 @@ public class LVQTrainer {
 			if (currentSample == 0) {
 				logger.log(GREEN + "Started sample 1/" + trainingPhases);
 				DataManager.startRecording(target);
+				currentSample++;
 				return;
 			}
 

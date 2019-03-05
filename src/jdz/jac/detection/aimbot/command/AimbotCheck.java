@@ -4,9 +4,7 @@ package jdz.jac.detection.aimbot.command;
 import static jdz.jac.notifier.Messager.error;
 import static jdz.jac.notifier.Messager.message;
 import static jdz.jac.notifier.Messager.plainMessage;
-import static org.bukkit.ChatColor.GREEN;
-import static org.bukkit.ChatColor.RED;
-import static org.bukkit.ChatColor.YELLOW;
+import static org.bukkit.ChatColor.*;
 
 import org.bukkit.entity.Player;
 
@@ -30,9 +28,9 @@ public class AimbotCheck extends SubCommand {
 		message(sender, YELLOW + "Checking " + target.getName() + " for " + timeLength + " seconds.");
 		try {
 			AimbotClassifier.classify(target, (data, result) -> {
-				plainMessage(sender, "** Analysis Report **");
+				message(sender, GOLD + " [ " + GREEN + "Analysis Report" + GOLD + " ] ");
 				plainMessage(sender, GREEN + "  Best matched: " + YELLOW + result.getBestMatched());
-				plainMessage(sender, GREEN + "  Euclidean distance: " + YELLOW + result.getDistance());
+				plainMessage(sender, GREEN + "  Confidence: " + YELLOW + result.getConfidence() + "%");
 			}, () -> {
 				error(sender, RED + "Insufficient data for an accurate classification");
 				error(sender, RED + "Increase test length or ensure target remains in combat while checking");

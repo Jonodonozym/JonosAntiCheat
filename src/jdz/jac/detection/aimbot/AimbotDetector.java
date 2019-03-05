@@ -23,8 +23,8 @@ import jdz.jac.detection.aimbot.aimData.DataManager;
 import jdz.jac.detection.aimbot.aimData.DataRecorder;
 
 public class AimbotDetector implements Listener {
-	private static final HackType AIMBOT_HACKTYPE = new HackType("aimbot", "%player%'s aim is consistent with aimbot data",
-			Severity.NONE, 600);
+	private static final HackType AIMBOT_HACKTYPE = new HackType("aimbot",
+			"%player%'s aim is consistent with aimbot data", Severity.NONE, 600);
 
 	private final CombatTimer timer;
 	private final Map<Player, Long> lastChecks = new HashMap<>();
@@ -54,7 +54,7 @@ public class AimbotDetector implements Listener {
 
 				new HackEvent(event.getPlayer(), AIMBOT_HACKTYPE, Arrays.toString(data),
 						GREEN + "type: " + YELLOW + result.getBestMatched(),
-						GREEN + "dist: " + YELLOW + result.getDistance()).call();
+						GREEN + "confidence: " + YELLOW + result.getConfidence() + "%").call();
 			}, 15);
 		}
 		catch (IllegalStateException e) {}
