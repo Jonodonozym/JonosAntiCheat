@@ -4,7 +4,7 @@ package jdz.jac.logger;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
-import jdz.bukkitUtils.events.Listener;
+import jdz.bukkitUtils.components.events.Listener;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.punisher.AutobanEvent;
 

@@ -3,7 +3,7 @@ package jdz.jac.detection.civbreak;
 
 import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.config.AutoConfig;
+import jdz.bukkitUtils.configuration.AutoConfig;
 
 public class CivBreakConfig extends AutoConfig {
 

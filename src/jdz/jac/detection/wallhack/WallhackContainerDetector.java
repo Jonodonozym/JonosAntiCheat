@@ -10,8 +10,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.InventoryHolder;
 
-import jdz.bukkitUtils.events.Listener;
-import jdz.bukkitUtils.misc.WorldUtils;
+import jdz.bukkitUtils.components.events.Listener;
+import jdz.bukkitUtils.utils.WorldUtils;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;

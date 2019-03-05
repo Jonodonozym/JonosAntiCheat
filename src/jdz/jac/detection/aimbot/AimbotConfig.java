@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.config.AutoConfig;
+import jdz.bukkitUtils.configuration.AutoConfig;
 
 public class AimbotConfig extends AutoConfig {
 	public static final int defaultTrainingSamples = 7;

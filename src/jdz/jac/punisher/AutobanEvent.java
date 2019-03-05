@@ -4,8 +4,8 @@ package jdz.jac.punisher;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-import jdz.bukkitUtils.events.Cancellable;
-import jdz.bukkitUtils.events.Event;
+import jdz.bukkitUtils.components.events.Cancellable;
+import jdz.bukkitUtils.components.events.Event;
 import jdz.jac.detection.HackType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

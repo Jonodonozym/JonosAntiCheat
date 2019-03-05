@@ -10,8 +10,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import jdz.bukkitUtils.events.Listener;
-import jdz.bukkitUtils.misc.CombatTimer;
+import jdz.bukkitUtils.components.CombatTimer;
+import jdz.bukkitUtils.components.events.Listener;
 import jdz.jac.ping.compensation.PlayerLocationHistory;
 
 public class DataRecorder implements Listener {

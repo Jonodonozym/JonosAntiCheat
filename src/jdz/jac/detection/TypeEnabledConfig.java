@@ -7,9 +7,9 @@ import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 
-import jdz.bukkitUtils.events.Listener;
-import jdz.bukkitUtils.events.custom.ConfigReloadEvent;
-import jdz.bukkitUtils.misc.Config;
+import jdz.bukkitUtils.components.events.Listener;
+import jdz.bukkitUtils.configuration.Config;
+import jdz.bukkitUtils.configuration.ConfigReloadEvent;
 import jdz.jac.JAC;
 
 public class TypeEnabledConfig implements Listener {

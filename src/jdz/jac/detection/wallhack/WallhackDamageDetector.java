@@ -1,16 +1,14 @@
 
 package jdz.jac.detection.wallhack;
 
-import java.util.HashSet;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import jdz.bukkitUtils.events.Listener;
-import jdz.bukkitUtils.misc.WorldUtils;
+import jdz.bukkitUtils.components.events.Listener;
+import jdz.bukkitUtils.utils.WorldUtils;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
@@ -28,8 +26,7 @@ public class WallhackDamageDetector implements Listener {
 		Player player = (Player) event.getDamager();
 		Player target = (Player) event.getEntity();
 
-		@SuppressWarnings("deprecation")
-		Block block = player.getTargetBlock((HashSet<Byte>) null, 8);
+		Block block = player.getTargetBlock(null, 8);
 		if (block == null)
 			return;
 

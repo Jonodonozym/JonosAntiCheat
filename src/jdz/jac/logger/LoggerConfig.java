@@ -4,8 +4,8 @@ package jdz.jac.logger;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.config.AutoConfig;
-import jdz.bukkitUtils.events.custom.ConfigReloadEvent;
+import jdz.bukkitUtils.configuration.AutoConfig;
+import jdz.bukkitUtils.configuration.ConfigReloadEvent;
 import lombok.Getter;
 
 public class LoggerConfig extends AutoConfig {

@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.config.AutoConfig;
-import jdz.bukkitUtils.misc.Random;
+import jdz.bukkitUtils.components.Random;
+import jdz.bukkitUtils.configuration.AutoConfig;
 import lombok.Getter;
 
 public class NotifierConfig extends AutoConfig {

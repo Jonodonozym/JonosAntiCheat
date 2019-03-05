@@ -2,7 +2,7 @@ package jdz.jac.punisher;
 
 import org.bukkit.entity.Player;
 
-import jdz.bukkitUtils.events.Listener;
+import jdz.bukkitUtils.components.events.Listener;
 import lombok.Getter;
 
 public class HistoryFetcher implements Listener {

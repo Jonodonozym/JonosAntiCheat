@@ -3,7 +3,8 @@ name: JAC
 version: 1.0
 author: Jonodonozym
 description: Jono's Anticheat
-softdepend: [JBU_11]
+softdepend: [JBU]
+api-version: 1.13
 
 commands:
   jac:

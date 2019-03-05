@@ -14,7 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import jdz.bukkitUtils.events.Listener;
+import jdz.bukkitUtils.components.events.Listener;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
@@ -40,7 +40,7 @@ public class CivBreakDetector implements Listener {
 		if (player.getGameMode() == GameMode.CREATIVE)
 			return;
 
-		if (!event.getClickedBlock().getType().equals(Material.ENDER_STONE))
+		if (!event.getClickedBlock().getType().equals(Material.END_STONE))
 			return;
 
 		hasClicked.add(player);
@@ -58,7 +58,7 @@ public class CivBreakDetector implements Listener {
 			return;
 		}
 
-		else if (event.getBlock().getType() == Material.ENDER_STONE && !hasClicked.contains(player)) {
+		else if (event.getBlock().getType() == Material.END_STONE && !hasClicked.contains(player)) {
 			new HackEvent(player, HACKTYPE_CIV_BREAK, "(No Click)").call();
 			event.setCancelled(true);
 		}
@@ -71,7 +71,7 @@ public class CivBreakDetector implements Listener {
 		if (!event.getType().equals(HACKTYPE_CIV_BREAK))
 			return;
 
-		ItemStack handItem = event.getPlayer().getItemInHand();
+		ItemStack handItem = event.getPlayer().getInventory().getItemInMainHand();
 		event.setExtraData("Held item: " + handItem.getType());
 
 		bannedPlayers.add(event.getPlayer());

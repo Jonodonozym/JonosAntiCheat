@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import jdz.bukkitUtils.commands.Command;
 import jdz.bukkitUtils.commands.annotations.CommandLabel;
 import jdz.bukkitUtils.commands.annotations.CommandMethod;
-import jdz.bukkitUtils.misc.Pair;
+import jdz.bukkitUtils.components.Pair;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;

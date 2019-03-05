@@ -9,7 +9,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import jdz.bukkitUtils.misc.Pair;
+import jdz.bukkitUtils.components.Pair;
 import jdz.jac.JAC;
 
 public class PingTop {

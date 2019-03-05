@@ -3,8 +3,8 @@ package jdz.jac.detection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-import jdz.bukkitUtils.events.Cancellable;
-import jdz.bukkitUtils.events.Event;
+import jdz.bukkitUtils.components.events.Cancellable;
+import jdz.bukkitUtils.components.events.Event;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

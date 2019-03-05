@@ -7,11 +7,11 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import jdz.bukkitUtils.events.Listener;
-import jdz.bukkitUtils.misc.utils.MaterialUtils;
+import jdz.bukkitUtils.components.events.Listener;
+import jdz.bukkitUtils.utils.MaterialUtils;
 import jdz.jac.JAC;
 import jdz.jac.ping.PingFetcher;
 
@@ -20,12 +20,15 @@ public class AutoArmorDetector implements Listener {
 	private final Set<Player> checked = new HashSet<>();
 
 	@EventHandler
-	public void onPickup(PlayerPickupItemEvent event) {
+	public void onPickup(EntityPickupItemEvent event) {
+		if (!(event.getEntity() instanceof Player))
+			return;
+
 		ItemStack stack = event.getItem().getItemStack();
 		if (!MaterialUtils.isArmour(stack.getType()))
 			return;
 
-		Player player = event.getPlayer();
+		Player player = (Player) event.getEntity();
 		if (checked.contains(player))
 			return;
 

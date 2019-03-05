@@ -7,7 +7,7 @@ import java.util.Set;
 import org.bukkit.Material;
 import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.config.AutoConfig;
+import jdz.bukkitUtils.configuration.AutoConfig;
 import lombok.Getter;
 
 public class WallhackConfig extends AutoConfig {

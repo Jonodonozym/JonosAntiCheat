@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 
 import org.bukkit.entity.Player;
 
-import jdz.bukkitUtils.misc.ReflectionUtils;
+import jdz.bukkitUtils.utils.ReflectionUtils;
 
 public class PingFetcher {
 	public static int getPing(Player player) {

@@ -1,7 +1,6 @@
 
 package jdz.jac.detection.aimbot;
 
-import static jdz.jac.detection.aimbot.AimbotConfig.isClassAllowed;
 import static jdz.jac.detection.aimbot.AimbotConfig.minRecheckIntervalSeconds;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.YELLOW;
@@ -14,9 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.events.Listener;
-import jdz.bukkitUtils.events.custom.CombatEnterEvent;
-import jdz.bukkitUtils.misc.CombatTimer;
+import jdz.bukkitUtils.components.CombatTimer;
+import jdz.bukkitUtils.components.events.Listener;
+import jdz.bukkitUtils.components.events.custom.CombatEnterEvent;
 import jdz.jac.detection.HackEvent;
 import jdz.jac.detection.HackType;
 import jdz.jac.detection.Severity;
@@ -50,7 +49,7 @@ public class AimbotDetector implements Listener {
 		System.out.println("Autochecking " + event.getPlayer().getName());
 		try {
 			AimbotClassifier.classify(event.getPlayer(), (data, result) -> {
-				if (isClassAllowed(result.getBestMatched()))
+				if (AimbotConfig.isClassAllowed(result.getBestMatched()))
 					return;
 
 				new HackEvent(event.getPlayer(), AIMBOT_HACKTYPE, Arrays.toString(data),

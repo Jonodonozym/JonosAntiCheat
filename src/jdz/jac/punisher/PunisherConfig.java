@@ -9,8 +9,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.Plugin;
 
-import jdz.bukkitUtils.events.Listener;
-import jdz.bukkitUtils.events.custom.ConfigReloadEvent;
+import jdz.bukkitUtils.components.events.Listener;
+import jdz.bukkitUtils.configuration.ConfigReloadEvent;
 import jdz.jac.JAC;
 import jdz.jac.detection.HackType;
 import lombok.Getter;
