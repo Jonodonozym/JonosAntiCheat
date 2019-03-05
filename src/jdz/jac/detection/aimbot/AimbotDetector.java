@@ -3,6 +3,8 @@ package jdz.jac.detection.aimbot;
 
 import static jdz.jac.detection.aimbot.AimbotConfig.isClassAllowed;
 import static jdz.jac.detection.aimbot.AimbotConfig.minRecheckIntervalSeconds;
+import static org.bukkit.ChatColor.GREEN;
+import static org.bukkit.ChatColor.YELLOW;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.Plugin;
 
-import static org.bukkit.ChatColor.*;
 import jdz.bukkitUtils.events.Listener;
 import jdz.bukkitUtils.events.custom.CombatEnterEvent;
 import jdz.bukkitUtils.misc.CombatTimer;
@@ -23,7 +24,7 @@ import jdz.jac.detection.aimbot.aimData.DataManager;
 import jdz.jac.detection.aimbot.aimData.DataRecorder;
 
 public class AimbotDetector implements Listener {
-	private static final HackType AIMBOT_HACKTYPE = new HackType("aimbot",
+	private static final HackType AIMBOT_HACKTYPE = new HackType("Aimbot",
 			"%player%'s aim is consistent with aimbot data", Severity.NONE, 600);
 
 	private final CombatTimer timer;

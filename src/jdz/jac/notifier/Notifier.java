@@ -79,7 +79,7 @@ public class Notifier implements Listener {
 	private static final Sound notifySound;
 	static {
 		Sound s = null;
-		for (Field field : Sound.class.getDeclaredFields()) {
+		for (Field field : Sound.class.getDeclaredFields())
 			if (field.getName().endsWith("ORB_PICKUP")) {
 				try {
 					s = (Sound) field.get(null);
@@ -89,7 +89,6 @@ public class Notifier implements Listener {
 				}
 				break;
 			}
-		}
 		notifySound = s;
 	}
 }

@@ -1,10 +1,7 @@
 
 package jdz.jac.detection.aimbot.neuralNetwork;
 
-import static jdz.jac.detection.aimbot.AimbotConfig.defaultTrainingSamples;
-import static jdz.jac.detection.aimbot.AimbotConfig.outlierThreshold;
-import static jdz.jac.detection.aimbot.AimbotConfig.trainingSampleSeconds;
-import static jdz.jac.detection.aimbot.AimbotConfig.minCheckClicks;
+import static jdz.jac.detection.aimbot.AimbotConfig.*;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.ChatColor.YELLOW;
