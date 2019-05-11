@@ -14,6 +14,7 @@ import jdz.jac.detection.autoarmor.AutoArmorConfig;
 import jdz.jac.detection.autoarmor.AutoArmorDetector;
 import jdz.jac.detection.civbreak.CivBreakConfig;
 import jdz.jac.detection.civbreak.CivBreakDetector;
+import jdz.jac.detection.superspeed.SuperSpeedDetection;
 import jdz.jac.detection.wallhack.WallhackConfig;
 import jdz.jac.detection.wallhack.WallhackDamageDetector;
 import jdz.jac.logger.LoggerConfig;
@@ -69,6 +70,8 @@ public class JAC extends JavaPlugin {
 		new AimbotDetector(this).registerEvents(this);
 		new AimbotConfig(this).register();
 		commands.add(new AimbotCommandExecutor(commands));
+		
+		SuperSpeedDetection.init(this);
 	}
 
 	public File getStorageFolder() {
